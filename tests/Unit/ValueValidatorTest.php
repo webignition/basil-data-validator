@@ -92,6 +92,9 @@ class ValueValidatorTest extends \PHPUnit\Framework\TestCase
             'attribute dom identifier' => [
                 'value' => '$".selector".attribute_name',
             ],
+            'environment parameter' => [
+                'value' => '$env.KEY',
+            ],
         ];
     }
 }
