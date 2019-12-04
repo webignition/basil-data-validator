@@ -7,4 +7,5 @@ namespace webignition\BasilDataValidator;
 class ResultType
 {
     public const VALUE = 'value';
+    public const ACTION = 'action';
 }
