@@ -21,21 +21,23 @@ class LiteralValueIdentifier
         }
 
         $characters = preg_split('//u', $value, -1, PREG_SPLIT_NO_EMPTY);
-        array_shift($characters);
-        $characterCount = count($characters);
+        if (is_array($characters)) {
+            array_shift($characters);
+            $characterCount = count($characters);
 
-        $previousCharacter = '';
+            $previousCharacter = '';
 
-        foreach ($characters as $index => $character) {
-            if (self::QUOTE === $character) {
-                if (self::ESCAPE !== $previousCharacter) {
-                    if ($index === $characterCount - 1) {
-                        return true;
+            foreach ($characters as $index => $character) {
+                if (self::QUOTE === $character) {
+                    if (self::ESCAPE !== $previousCharacter) {
+                        if ($index === $characterCount - 1) {
+                            return true;
+                        }
                     }
                 }
-            }
 
-            $previousCharacter = $character;
+                $previousCharacter = $character;
+            }
         }
 
         return false;
