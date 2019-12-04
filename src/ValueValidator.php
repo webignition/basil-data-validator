@@ -16,6 +16,7 @@ class ValueValidator
     public const REASON_PROPERTY_INVALID = 'value-property-invalid';
     public const REASON_INVALID = 'value-invalid';
     private const DATA_PARAMETER_REGEX = '/^\$data\.[^\.]+$/';
+    private const ENVIRONMENT_PARAMETER_REGEX = '/^\$env\.[^\.]+$/';
 
     private $identifierTypeAnalyser;
     private $literalValueIdentifier;
@@ -43,6 +44,10 @@ class ValueValidator
         }
 
         if (preg_match(self::DATA_PARAMETER_REGEX, $value) > 0) {
+            return new ValidResult($value);
+        }
+
+        if (preg_match(self::ENVIRONMENT_PARAMETER_REGEX, $value) > 0) {
             return new ValidResult($value);
         }
 
