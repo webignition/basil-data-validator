@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace webignition\BasilDataValidator\Tests\Unit\Step;
 
 use webignition\BasilDataValidator\Action\ActionValidator;
+use webignition\BasilDataValidator\Assertion\AssertionValidator;
 use webignition\BasilDataValidator\ResultType;
 use webignition\BasilDataValidator\Step\StepValidator;
+use webignition\BasilDataValidator\ValueValidator;
 use webignition\BasilModels\Step\StepInterface;
 use webignition\BasilParser\ActionParser;
+use webignition\BasilParser\AssertionParser;
 use webignition\BasilParser\StepParser;
 use webignition\BasilValidationResult\InvalidResult;
 use webignition\BasilValidationResult\InvalidResultInterface;
@@ -41,7 +44,7 @@ class StepValidatorTest extends \PHPUnit\Framework\TestCase
         $stepParser = StepParser::create();
 
         return [
-            'valid actions' => [
+            'valid actions, valid assertions' => [
                 'step' => $stepParser->parse([
                     'actions' => [
                         'click $".selector"',
@@ -66,6 +69,7 @@ class StepValidatorTest extends \PHPUnit\Framework\TestCase
     {
         $stepParser = StepParser::create();
         $actionParser = ActionParser::create();
+        $assertionParser = AssertionParser::create();
 
         $invalidActionStep = $stepParser->parse([
             'actions' => [
@@ -76,8 +80,17 @@ class StepValidatorTest extends \PHPUnit\Framework\TestCase
             ],
         ]);
 
+        $invalidAssertionStep = $stepParser->parse([
+            'actions' => [
+                'click $".selector"',
+            ],
+            'assertions' => [
+                '$elements.element_name exists'
+            ],
+        ]);
+
         return [
-            'interaction action: identifier invalid (element reference)' => [
+            'invalid step: invalid action' => [
                 'step' => $invalidActionStep,
                 'expectedResult' => new InvalidResult(
                     $invalidActionStep,
@@ -87,6 +100,24 @@ class StepValidatorTest extends \PHPUnit\Framework\TestCase
                         $actionParser->parse('click $elements.element_name'),
                         ResultType::ACTION,
                         ActionValidator::REASON_INVALID_IDENTIFIER
+                    )
+                ),
+            ],
+            'invalid step: invalid assertion' => [
+                'step' => $invalidAssertionStep,
+                'expectedResult' => new InvalidResult(
+                    $invalidAssertionStep,
+                    ResultType::STEP,
+                    StepValidator::REASON_INVALID_ASSERTION,
+                    new InvalidResult(
+                        $assertionParser->parse('$elements.element_name exists'),
+                        ResultType::ASSERTION,
+                        AssertionValidator::REASON_INVALID_IDENTIFIER,
+                        new InvalidResult(
+                            '$elements.element_name',
+                            ResultType::VALUE,
+                            ValueValidator::REASON_INVALID
+                        )
                     )
                 ),
             ],
