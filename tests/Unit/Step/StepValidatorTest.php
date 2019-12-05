@@ -8,7 +8,7 @@ use webignition\BasilDataValidator\Action\ActionValidator;
 use webignition\BasilDataValidator\Assertion\AssertionValidator;
 use webignition\BasilDataValidator\ResultType;
 use webignition\BasilDataValidator\DataSetValidator;
-use webignition\BasilDataValidator\Step\DataValidator;
+use webignition\BasilDataValidator\DataValidator;
 use webignition\BasilDataValidator\Step\StepValidator;
 use webignition\BasilDataValidator\ValueValidator;
 use webignition\BasilModels\DataSet\DataSet;

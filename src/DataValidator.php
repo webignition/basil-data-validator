@@ -2,10 +2,8 @@
 
 declare(strict_types=1);
 
-namespace webignition\BasilDataValidator\Step;
+namespace webignition\BasilDataValidator;
 
-use webignition\BasilDataValidator\DataSetValidator;
-use webignition\BasilDataValidator\ResultType;
 use webignition\BasilModels\DataParameter\DataParameterInterface;
 use webignition\BasilModels\DataSet\DataSetCollectionInterface;
 use webignition\BasilValidationResult\InvalidResult;
@@ -16,6 +14,7 @@ use webignition\BasilValidationResult\ValidResult;
 class DataValidator
 {
     public const REASON_DATASET_INVALID = 'data-dataset-invalid';
+    public const REASON_DATA_EMPTY = 'data-empty';
 
     private $dataSetValidator;
 
@@ -35,6 +34,14 @@ class DataValidator
     {
         $localData = clone $data;
         reset($localData);
+
+        if (0 === count($localData)) {
+            return new InvalidResult(
+                $data,
+                ResultType::DATA,
+                self::REASON_DATA_EMPTY
+            );
+        }
 
         foreach ($localData as $dataSet) {
             $dataSetValidationResult = $this->dataSetValidator->validate($dataSet, $dataParameter);

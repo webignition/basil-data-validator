@@ -6,6 +6,7 @@ namespace webignition\BasilDataValidator\Step;
 
 use webignition\BasilDataValidator\Action\ActionValidator;
 use webignition\BasilDataValidator\Assertion\AssertionValidator;
+use webignition\BasilDataValidator\DataValidator;
 use webignition\BasilDataValidator\ResultType;
 use webignition\BasilModels\Action\InputActionInterface;
 use webignition\BasilModels\Assertion\ComparisonAssertionInterface;
