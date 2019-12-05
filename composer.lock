@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e133d3d7e05c1eae12e002926f1ffa8c",
+    "content-hash": "d9ddb83140dfac6f811517cf98e4dfc0",
     "packages": [
         {
             "name": "webignition/basil-identifier-analyser",
@@ -2893,16 +2893,16 @@
         },
         {
             "name": "webignition/basil-parser",
-            "version": "0.7",
+            "version": "0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webignition/basil-parser.git",
-                "reference": "aa945a6d20aba0357b53fc6415d6fccccc07e810"
+                "reference": "33c61366ea0217e927f3bb33efa2b1b0377a2a3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webignition/basil-parser/zipball/aa945a6d20aba0357b53fc6415d6fccccc07e810",
-                "reference": "aa945a6d20aba0357b53fc6415d6fccccc07e810",
+                "url": "https://api.github.com/repos/webignition/basil-parser/zipball/33c61366ea0217e927f3bb33efa2b1b0377a2a3c",
+                "reference": "33c61366ea0217e927f3bb33efa2b1b0377a2a3c",
                 "shasum": ""
             },
             "require": {
@@ -2934,7 +2934,7 @@
             ],
             "description": "Parses raw basil data into basic data structures",
             "homepage": "https://github.com/webignition/basil-parser",
-            "time": "2019-11-29T18:18:06+00:00"
+            "time": "2019-12-05T11:12:35+00:00"
         },
         {
             "name": "webignition/php-path-resolver",
