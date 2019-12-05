@@ -25,21 +25,21 @@ class StepValidator
     public const REASON_INVALID_ACTION = 'step-invalid-action';
     public const REASON_INVALID_ASSERTION = 'step-invalid-assertion';
     public const REASON_DATA_SET_EMPTY = 'step-data-set-empty';
-    public const REASON_DATA_SET_INVALID = 'step-data-set-invalid';
+    public const REASON_DATA_INVALID = 'step-data-invalid';
     public const CONTEXT_STATEMENT = 'statement';
 
     private $actionValidator;
     private $assertionValidator;
-    private $dataSetValidator;
+    private $dataValidator;
 
     public function __construct(
         ActionValidator $actionValidator,
         AssertionValidator $assertionValidator,
-        DataSetValidator $dataSetValidator
+        DataValidator $dataSetCollectionValidator
     ) {
         $this->actionValidator = $actionValidator;
         $this->assertionValidator = $assertionValidator;
-        $this->dataSetValidator = $dataSetValidator;
+        $this->dataValidator = $dataSetCollectionValidator;
     }
 
     public static function create(): StepValidator
@@ -47,7 +47,7 @@ class StepValidator
         return new StepValidator(
             ActionValidator::create(),
             AssertionValidator::create(),
-            DataSetValidator::create()
+            DataValidator::create()
         );
     }
 
@@ -151,28 +151,26 @@ class StepValidator
 
     private function validateStatementData(
         StepInterface $step,
-        StatementInterface $action,
+        StatementInterface $statement,
         DataParameterInterface $dataParameter
     ): ?ResultInterface {
         $stepData = $step->getData() ?? new DataSetCollection([]);
 
-        foreach ($stepData as $dataSet) {
-            $dataSetValidationResult = $this->dataSetValidator->validate($dataSet, $dataParameter);
+        $dataValidationResult = $this->dataValidator->validate($stepData, $dataParameter);
 
-            if ($dataSetValidationResult instanceof InvalidResultInterface) {
-                $result = new InvalidResult(
-                    $step,
-                    ResultType::STEP,
-                    self::REASON_DATA_SET_INVALID,
-                    $dataSetValidationResult
-                );
+        if ($dataValidationResult instanceof InvalidResultInterface) {
+            $result = new InvalidResult(
+                $step,
+                ResultType::STEP,
+                self::REASON_DATA_INVALID,
+                $dataValidationResult
+            );
 
-                $result = $result->withContext([
-                    self::CONTEXT_STATEMENT => $action,
-                ]);
+            $result = $result->withContext([
+                self::CONTEXT_STATEMENT => $statement,
+            ]);
 
-                return $result;
-            }
+            return $result;
         }
 
         return null;

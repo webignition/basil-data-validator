@@ -8,9 +8,11 @@ use webignition\BasilDataValidator\Action\ActionValidator;
 use webignition\BasilDataValidator\Assertion\AssertionValidator;
 use webignition\BasilDataValidator\ResultType;
 use webignition\BasilDataValidator\Step\DataSetValidator;
+use webignition\BasilDataValidator\Step\DataValidator;
 use webignition\BasilDataValidator\Step\StepValidator;
 use webignition\BasilDataValidator\ValueValidator;
 use webignition\BasilModels\DataSet\DataSet;
+use webignition\BasilModels\DataSet\DataSetCollection;
 use webignition\BasilModels\Step\StepInterface;
 use webignition\BasilParser\ActionParser;
 use webignition\BasilParser\AssertionParser;
@@ -136,6 +138,21 @@ class StepValidatorTest extends \PHPUnit\Framework\TestCase
             '1' => $incompleteDataSet,
         ];
 
+        $incompleteDataSetCollection = new DataSetCollection($incompleteData);
+
+        $invalidDataResult = new InvalidResult(
+            $incompleteDataSetCollection,
+            ResultType::DATA,
+            DataValidator::REASON_DATASET_INVALID,
+            (new InvalidResult(
+                new DataSet('1', $incompleteDataSet),
+                ResultType::DATASET,
+                DataSetValidator::REASON_DATASET_INCOMPLETE
+            ))->withContext([
+                DataSetValidator::CONTEXT_DATA_PARAMETER_NAME => 'key1',
+            ])
+        );
+
         $invalidActionDataStepDataParameterMissing = $stepParser->parse([
             'actions' => [
                 'set $".selector1" to $data.key1',
@@ -153,15 +170,6 @@ class StepValidatorTest extends \PHPUnit\Framework\TestCase
                 '$".selector2" is $data.key2',
             ],
             'data' => $incompleteData,
-        ]);
-
-        $invalidDataSetResult = (new InvalidResult(
-            new DataSet('1', $incompleteDataSet),
-            ResultType::DATA_SET,
-            DataSetValidator::REASON_DATA_SET_INCOMPLETE
-        ))->withContext([
-            DataSetValidator::CONTEXT_DATA_SET => new DataSet('1', $incompleteDataSet),
-            DataSetValidator::CONTEXT_DATA_PARAMETER_NAME => 'key1',
         ]);
 
         $invalidAssertionDataStepDataParameterMissing2 = $stepParser->parse([
@@ -233,10 +241,9 @@ class StepValidatorTest extends \PHPUnit\Framework\TestCase
                 'expectedResult' => (new InvalidResult(
                     $invalidActionDataStepDataParameterMissing,
                     ResultType::STEP,
-                    StepValidator::REASON_DATA_SET_INVALID,
-                    $invalidDataSetResult
+                    StepValidator::REASON_DATA_INVALID,
+                    $invalidDataResult
                 ))->withContext([
-
                     StepValidator::CONTEXT_STATEMENT => $actionParser->parse('set $".selector1" to $data.key1'),
                 ]),
             ],
@@ -245,8 +252,8 @@ class StepValidatorTest extends \PHPUnit\Framework\TestCase
                 'expectedResult' => (new InvalidResult(
                     $invalidAssertionDataStepDataParameterMissing1,
                     ResultType::STEP,
-                    StepValidator::REASON_DATA_SET_INVALID,
-                    $invalidDataSetResult
+                    StepValidator::REASON_DATA_INVALID,
+                    $invalidDataResult
                 ))->withContext([
                     StepValidator::CONTEXT_STATEMENT => $assertionParser->parse('$".selector1" is $data.key1'),
                 ]),
@@ -256,8 +263,8 @@ class StepValidatorTest extends \PHPUnit\Framework\TestCase
                 'expectedResult' => (new InvalidResult(
                     $invalidAssertionDataStepDataParameterMissing2,
                     ResultType::STEP,
-                    StepValidator::REASON_DATA_SET_INVALID,
-                    $invalidDataSetResult
+                    StepValidator::REASON_DATA_INVALID,
+                    $invalidDataResult
                 ))->withContext([
                     StepValidator::CONTEXT_STATEMENT => $assertionParser->parse('$data.key1 is "value1"'),
                 ]),

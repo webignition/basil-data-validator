@@ -10,5 +10,6 @@ class ResultType
     public const ACTION = 'action';
     public const ASSERTION = 'assertion';
     public const STEP = 'step';
-    public const DATA_SET = 'data-set';
+    public const DATASET = 'dataset';
+    public const DATA = 'data';
 }

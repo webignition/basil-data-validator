@@ -1,0 +1,53 @@
+<?php
+
+declare(strict_types=1);
+
+namespace webignition\BasilDataValidator\Step;
+
+use webignition\BasilDataValidator\ResultType;
+use webignition\BasilModels\DataParameter\DataParameterInterface;
+use webignition\BasilModels\DataSet\DataSetCollectionInterface;
+use webignition\BasilValidationResult\InvalidResult;
+use webignition\BasilValidationResult\InvalidResultInterface;
+use webignition\BasilValidationResult\ResultInterface;
+use webignition\BasilValidationResult\ValidResult;
+
+class DataValidator
+{
+    public const REASON_DATASET_INVALID = 'data-dataset-invalid';
+
+    private $dataSetValidator;
+
+    public function __construct(DataSetValidator $dataSetValidator)
+    {
+        $this->dataSetValidator = $dataSetValidator;
+    }
+
+    public static function create(): DataValidator
+    {
+        return new DataValidator(
+            DataSetValidator::create()
+        );
+    }
+
+    public function validate(DataSetCollectionInterface $data, DataParameterInterface $dataParameter): ?ResultInterface
+    {
+        $localData = clone $data;
+        reset($localData);
+
+        foreach ($localData as $dataSet) {
+            $dataSetValidationResult = $this->dataSetValidator->validate($dataSet, $dataParameter);
+
+            if ($dataSetValidationResult instanceof InvalidResultInterface) {
+                return new InvalidResult(
+                    $data,
+                    ResultType::DATA,
+                    self::REASON_DATASET_INVALID,
+                    $dataSetValidationResult
+                );
+            }
+        }
+
+        return new ValidResult($data);
+    }
+}
