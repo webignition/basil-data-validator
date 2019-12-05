@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace webignition\BasilDataValidator\Step;
+namespace webignition\BasilDataValidator;
 
-use webignition\BasilDataValidator\ResultType;
 use webignition\BasilModels\DataParameter\DataParameterInterface;
 use webignition\BasilModels\DataSet\DataSetInterface;
 use webignition\BasilValidationResult\InvalidResult;

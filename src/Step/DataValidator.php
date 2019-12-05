@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace webignition\BasilDataValidator\Step;
 
+use webignition\BasilDataValidator\DataSetValidator;
 use webignition\BasilDataValidator\ResultType;
 use webignition\BasilModels\DataParameter\DataParameterInterface;
 use webignition\BasilModels\DataSet\DataSetCollectionInterface;
