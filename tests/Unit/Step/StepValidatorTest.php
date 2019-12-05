@@ -7,8 +7,12 @@ namespace webignition\BasilDataValidator\Tests\Unit\Step;
 use webignition\BasilDataValidator\Action\ActionValidator;
 use webignition\BasilDataValidator\Assertion\AssertionValidator;
 use webignition\BasilDataValidator\ResultType;
+use webignition\BasilDataValidator\DataSetValidator;
+use webignition\BasilDataValidator\DataValidator;
 use webignition\BasilDataValidator\Step\StepValidator;
 use webignition\BasilDataValidator\ValueValidator;
+use webignition\BasilModels\DataSet\DataSet;
+use webignition\BasilModels\DataSet\DataSetCollection;
 use webignition\BasilModels\Step\StepInterface;
 use webignition\BasilParser\ActionParser;
 use webignition\BasilParser\AssertionParser;
@@ -54,6 +58,27 @@ class StepValidatorTest extends \PHPUnit\Framework\TestCase
                     ],
                 ]),
             ],
+            'valid data sets' => [
+                'step' => $stepParser->parse([
+                    'actions' => [
+                        'set $".input" to $data.input',
+                    ],
+                    'assertions' => [
+                        '$".button" is $data.expected_button_text',
+                        '$data.input is "value"',
+                    ],
+                    'data' => [
+                        '0' => [
+                            'input' => 'Sheep',
+                            'expected_button_text' => 'Baa',
+                        ],
+                        '1' => [
+                            'input' => 'Cow',
+                            'expected_button_text' => 'Moo',
+                        ],
+                    ],
+                ]),
+            ],
         ];
     }
 
@@ -81,12 +106,78 @@ class StepValidatorTest extends \PHPUnit\Framework\TestCase
         ]);
 
         $invalidAssertionStep = $stepParser->parse([
-            'actions' => [
-                'click $".selector"',
-            ],
             'assertions' => [
                 '$elements.element_name exists'
             ],
+        ]);
+
+        $invalidActionDataStepNoData = $stepParser->parse([
+            'actions' => [
+                'set $".selector" to $data.key',
+            ],
+            'assertions' => [
+                '$".selector" exists'
+            ],
+        ]);
+
+        $invalidAssertionDataStepNoData = $stepParser->parse([
+            'assertions' => [
+                '$".selector" is $data.key'
+            ],
+        ]);
+
+        $incompleteDataSet = [
+            'key2' => 'key2value2',
+        ];
+
+        $incompleteData = [
+            '0' => [
+                'key1' => 'key1value1',
+                'key2' => 'key2value1',
+            ],
+            '1' => $incompleteDataSet,
+        ];
+
+        $incompleteDataSetCollection = new DataSetCollection($incompleteData);
+
+        $invalidDataResult = new InvalidResult(
+            $incompleteDataSetCollection,
+            ResultType::DATA,
+            DataValidator::REASON_DATASET_INVALID,
+            (new InvalidResult(
+                new DataSet('1', $incompleteDataSet),
+                ResultType::DATASET,
+                DataSetValidator::REASON_DATASET_INCOMPLETE
+            ))->withContext([
+                DataSetValidator::CONTEXT_DATA_PARAMETER_NAME => 'key1',
+            ])
+        );
+
+        $invalidActionDataStepDataParameterMissing = $stepParser->parse([
+            'actions' => [
+                'set $".selector1" to $data.key1',
+                'set $".selector2" to $data.key2',
+            ],
+            'assertions' => [
+                '$".selector" exists'
+            ],
+            'data' => $incompleteData,
+        ]);
+
+        $invalidAssertionDataStepDataParameterMissing1 = $stepParser->parse([
+            'assertions' => [
+                '$".selector1" is $data.key1',
+                '$".selector2" is $data.key2',
+            ],
+            'data' => $incompleteData,
+        ]);
+
+        $invalidAssertionDataStepDataParameterMissing2 = $stepParser->parse([
+            'assertions' => [
+                '$data.key1 is "value1"',
+                '$data.key2 is "value2',
+            ],
+            'data' => $incompleteData,
         ]);
 
         return [
@@ -128,6 +219,55 @@ class StepValidatorTest extends \PHPUnit\Framework\TestCase
                         )
                     )
                 ),
+            ],
+            'invalid step: action uses data parameter, step has no data' => [
+                'step' => $invalidActionDataStepNoData,
+                'expectedResult' => new InvalidResult(
+                    $invalidActionDataStepNoData,
+                    ResultType::STEP,
+                    StepValidator::REASON_DATA_SET_EMPTY
+                ),
+            ],
+            'invalid step: assertion uses data parameter, step has no data' => [
+                'step' => $invalidAssertionDataStepNoData,
+                'expectedResult' => new InvalidResult(
+                    $invalidAssertionDataStepNoData,
+                    ResultType::STEP,
+                    StepValidator::REASON_DATA_SET_EMPTY
+                ),
+            ],
+            'invalid step: action uses data parameter, key missing from step data' => [
+                'step' => $invalidActionDataStepDataParameterMissing,
+                'expectedResult' => (new InvalidResult(
+                    $invalidActionDataStepDataParameterMissing,
+                    ResultType::STEP,
+                    StepValidator::REASON_DATA_INVALID,
+                    $invalidDataResult
+                ))->withContext([
+                    StepValidator::CONTEXT_STATEMENT => $actionParser->parse('set $".selector1" to $data.key1'),
+                ]),
+            ],
+            'invalid step: assertion uses data parameter, value key missing from step data' => [
+                'step' => $invalidAssertionDataStepDataParameterMissing1,
+                'expectedResult' => (new InvalidResult(
+                    $invalidAssertionDataStepDataParameterMissing1,
+                    ResultType::STEP,
+                    StepValidator::REASON_DATA_INVALID,
+                    $invalidDataResult
+                ))->withContext([
+                    StepValidator::CONTEXT_STATEMENT => $assertionParser->parse('$".selector1" is $data.key1'),
+                ]),
+            ],
+            'invalid step: assertion uses data parameter, identifier key missing from step data' => [
+                'step' => $invalidAssertionDataStepDataParameterMissing2,
+                'expectedResult' => (new InvalidResult(
+                    $invalidAssertionDataStepDataParameterMissing2,
+                    ResultType::STEP,
+                    StepValidator::REASON_DATA_INVALID,
+                    $invalidDataResult
+                ))->withContext([
+                    StepValidator::CONTEXT_STATEMENT => $assertionParser->parse('$data.key1 is "value1"'),
+                ]),
             ],
         ];
     }
