@@ -7,6 +7,7 @@ namespace webignition\BasilDataValidator\Tests\Unit\Step;
 use webignition\BasilDataValidator\Action\ActionValidator;
 use webignition\BasilDataValidator\Assertion\AssertionValidator;
 use webignition\BasilDataValidator\ResultType;
+use webignition\BasilDataValidator\Step\DataSetValidator;
 use webignition\BasilDataValidator\Step\StepValidator;
 use webignition\BasilDataValidator\ValueValidator;
 use webignition\BasilModels\DataSet\DataSet;
@@ -154,6 +155,15 @@ class StepValidatorTest extends \PHPUnit\Framework\TestCase
             'data' => $incompleteData,
         ]);
 
+        $invalidDataSetResult = (new InvalidResult(
+            new DataSet('1', $incompleteDataSet),
+            ResultType::DATA_SET,
+            DataSetValidator::REASON_DATA_SET_INCOMPLETE
+        ))->withContext([
+            DataSetValidator::CONTEXT_DATA_SET => new DataSet('1', $incompleteDataSet),
+            DataSetValidator::CONTEXT_DATA_PARAMETER_NAME => 'key1',
+        ]);
+
         $invalidAssertionDataStepDataParameterMissing2 = $stepParser->parse([
             'assertions' => [
                 '$data.key1 is "value1"',
@@ -223,10 +233,10 @@ class StepValidatorTest extends \PHPUnit\Framework\TestCase
                 'expectedResult' => (new InvalidResult(
                     $invalidActionDataStepDataParameterMissing,
                     ResultType::STEP,
-                    StepValidator::REASON_DATA_SET_INCOMPLETE
+                    StepValidator::REASON_DATA_SET_INVALID,
+                    $invalidDataSetResult
                 ))->withContext([
-                    StepValidator::CONTEXT_DATA_SET => new DataSet('1', $incompleteDataSet),
-                    StepValidator::CONTEXT_DATA_PARAMETER_NAME => 'key1',
+
                     StepValidator::CONTEXT_STATEMENT => $actionParser->parse('set $".selector1" to $data.key1'),
                 ]),
             ],
@@ -235,10 +245,9 @@ class StepValidatorTest extends \PHPUnit\Framework\TestCase
                 'expectedResult' => (new InvalidResult(
                     $invalidAssertionDataStepDataParameterMissing1,
                     ResultType::STEP,
-                    StepValidator::REASON_DATA_SET_INCOMPLETE
+                    StepValidator::REASON_DATA_SET_INVALID,
+                    $invalidDataSetResult
                 ))->withContext([
-                    StepValidator::CONTEXT_DATA_SET => new DataSet('1', $incompleteDataSet),
-                    StepValidator::CONTEXT_DATA_PARAMETER_NAME => 'key1',
                     StepValidator::CONTEXT_STATEMENT => $assertionParser->parse('$".selector1" is $data.key1'),
                 ]),
             ],
@@ -247,10 +256,9 @@ class StepValidatorTest extends \PHPUnit\Framework\TestCase
                 'expectedResult' => (new InvalidResult(
                     $invalidAssertionDataStepDataParameterMissing2,
                     ResultType::STEP,
-                    StepValidator::REASON_DATA_SET_INCOMPLETE
+                    StepValidator::REASON_DATA_SET_INVALID,
+                    $invalidDataSetResult
                 ))->withContext([
-                    StepValidator::CONTEXT_DATA_SET => new DataSet('1', $incompleteDataSet),
-                    StepValidator::CONTEXT_DATA_PARAMETER_NAME => 'key1',
                     StepValidator::CONTEXT_STATEMENT => $assertionParser->parse('$data.key1 is "value1"'),
                 ]),
             ],
