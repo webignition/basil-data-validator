@@ -90,6 +90,14 @@ class StepValidatorTest extends \PHPUnit\Framework\TestCase
         ]);
 
         return [
+            'invalid step: no assertions' => [
+                'step' => $stepParser->parse([]),
+                'expectedResult' => new InvalidResult(
+                    $stepParser->parse([]),
+                    ResultType::STEP,
+                    StepValidator::REASON_NO_ASSERTIONS
+                ),
+            ],
             'invalid step: invalid action' => [
                 'step' => $invalidActionStep,
                 'expectedResult' => new InvalidResult(

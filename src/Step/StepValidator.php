@@ -15,6 +15,7 @@ use webignition\BasilValidationResult\ValidResult;
 
 class StepValidator
 {
+    public const REASON_NO_ASSERTIONS = 'step-no-assertions';
     public const REASON_INVALID_ACTION = 'step-invalid-action';
     public const REASON_INVALID_ASSERTION = 'step-invalid-assertion';
 
@@ -37,6 +38,15 @@ class StepValidator
 
     public function validate(StepInterface $step): ResultInterface
     {
+        $assertions = $step->getAssertions();
+        if (0 === count($assertions)) {
+            return new InvalidResult(
+                $step,
+                ResultType::STEP,
+                self::REASON_NO_ASSERTIONS
+            );
+        }
+
         foreach ($step->getActions() as $action) {
             $actionValidationResult = $this->actionValidator->validate($action);
 
@@ -50,7 +60,7 @@ class StepValidator
             }
         }
 
-        foreach ($step->getAssertions() as $assertion) {
+        foreach ($assertions as $assertion) {
             $assertionValidationResult = $this->assertionValidator->validate($assertion);
 
             if ($assertionValidationResult instanceof InvalidResultInterface) {
