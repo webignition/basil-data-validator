@@ -14,4 +14,5 @@ class ResultType
     public const DATA = 'data';
     public const PAGE = 'page';
     public const TEST_CONFIGURATION = 'test-configuration';
+    public const TEST = 'test';
 }
