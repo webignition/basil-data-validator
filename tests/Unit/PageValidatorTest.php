@@ -38,10 +38,10 @@ class PageValidatorTest extends \PHPUnit\Framework\TestCase
     {
         return [
             'url only' => [
-                'page' => new Page('http://example.com'),
+                'page' => new Page('import_name', 'http://example.com'),
             ],
             'url and identifiers' => [
-                'page' => new Page('http://example.com', [
+                'page' => new Page('import_name', 'http://example.com', [
                     'form' => '$".form"',
                     'form_input' => '$"{{ form }} .input"',
                 ]),
@@ -61,19 +61,19 @@ class PageValidatorTest extends \PHPUnit\Framework\TestCase
     {
         return [
             'url empty' => [
-                'page' => new Page(''),
+                'page' => new Page('import_name', ''),
                 'expectedResult' => new InvalidResult(
-                    new Page(''),
+                    new Page('import_name', ''),
                     ResultType::PAGE,
                     PageValidator::REASON_URL_EMPTY
                 ),
             ],
             'invalid identifiers: attribute identifier' => [
-                'page' => new Page('http://example.com', [
+                'page' => new Page('import_name', 'http://example.com', [
                     'name' => '$".selector".attribute_name',
                 ]),
                 'expectedResult' => (new InvalidResult(
-                    new Page('http://example.com', [
+                    new Page('import_name', 'http://example.com', [
                         'name' => '$".selector".attribute_name',
                     ]),
                     ResultType::PAGE,
@@ -84,11 +84,11 @@ class PageValidatorTest extends \PHPUnit\Framework\TestCase
                 ]),
             ],
             'invalid identifiers: element reference' => [
-                'page' => new Page('http://example.com', [
+                'page' => new Page('import_name', 'http://example.com', [
                     'name' => '$elements.element_name',
                 ]),
                 'expectedResult' => (new InvalidResult(
-                    new Page('http://example.com', [
+                    new Page('import_name', 'http://example.com', [
                         'name' => '$elements.element_name',
                     ]),
                     ResultType::PAGE,
