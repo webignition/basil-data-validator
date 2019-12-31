@@ -34,7 +34,7 @@ class DataValidator
     public function validate(DataSetCollectionInterface $data, DataParameterInterface $dataParameter): ?ResultInterface
     {
         $localData = clone $data;
-        reset($localData);
+        $localData->rewind();
 
         if (0 === count($localData)) {
             return new InvalidResult(
