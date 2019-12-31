@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "898575ef4b8692cca1907776818e9f06",
+    "content-hash": "9f5647ab125861e3c5ed0a4d59a2589d",
     "packages": [
         {
             "name": "webignition/basil-identifier-analyser",
@@ -49,23 +49,23 @@
         },
         {
             "name": "webignition/basil-models",
-            "version": "0.18",
+            "version": "0.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webignition/basil-models.git",
-                "reference": "c6837aea3548f4fd7b40d7ae4453b15b5c3067e5"
+                "reference": "ba651c93928294b9a0569f2b3cbd6b9a9c4a9ef0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webignition/basil-models/zipball/c6837aea3548f4fd7b40d7ae4453b15b5c3067e5",
-                "reference": "c6837aea3548f4fd7b40d7ae4453b15b5c3067e5",
+                "url": "https://api.github.com/repos/webignition/basil-models/zipball/ba651c93928294b9a0569f2b3cbd6b9a9c4a9ef0",
+                "reference": "ba651c93928294b9a0569f2b3cbd6b9a9c4a9ef0",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2"
             },
             "require-dev": {
-                "phpstan/phpstan": "^0.11.5",
+                "phpstan/phpstan": "^0.12",
                 "phpunit/phpunit": "~8.0",
                 "squizlabs/php_codesniffer": "3.*"
             },
@@ -86,7 +86,7 @@
                 }
             ],
             "homepage": "https://github.com/webignition/basil-models",
-            "time": "2019-12-05T15:39:29+00:00"
+            "time": "2019-12-19T15:51:58+00:00"
         },
         {
             "name": "webignition/basil-validation-result",
