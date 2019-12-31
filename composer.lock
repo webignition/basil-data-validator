@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9f5647ab125861e3c5ed0a4d59a2589d",
+    "content-hash": "ebde210593624b6518282d390906ad94",
     "packages": [
         {
             "name": "webignition/basil-identifier-analyser",
@@ -2900,6 +2900,137 @@
             "description": "Parses raw basil data into basic data structures",
             "homepage": "https://github.com/webignition/basil-parser",
             "time": "2019-12-05T11:12:35+00:00"
+        },
+        {
+            "name": "webignition/basil-resolver",
+            "version": "0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webignition/basil-resolver.git",
+                "reference": "c6dd15928e639a318d6b2a8a26d1c700f3a6c20f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webignition/basil-resolver/zipball/c6dd15928e639a318d6b2a8a26d1c700f3a6c20f",
+                "reference": "c6dd15928e639a318d6b2a8a26d1c700f3a6c20f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2",
+                "webignition/basil-models": ">=0.24,<1",
+                "webignition/php-basil-context-aware-exception": ">=0.1,<1",
+                "webignition/php-basil-model-provider": ">=0.4,<1"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "~8.0",
+                "squizlabs/php_codesniffer": "3.*",
+                "webignition/basil-parser": ">=0.12,<1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "webignition\\BasilResolver\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jon Cram",
+                    "email": "webignition@gmail.com"
+                }
+            ],
+            "homepage": "https://github.com/webignition/basil-resolver",
+            "time": "2019-12-19T17:30:52+00:00"
+        },
+        {
+            "name": "webignition/php-basil-context-aware-exception",
+            "version": "0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webignition/php-basil-context-aware-exception.git",
+                "reference": "c1435f31a79191748f90e091775dbb278510ee41"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webignition/php-basil-context-aware-exception/zipball/c1435f31a79191748f90e091775dbb278510ee41",
+                "reference": "c1435f31a79191748f90e091775dbb278510ee41",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.11.5",
+                "phpunit/phpunit": "~8.0",
+                "squizlabs/php_codesniffer": "3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "webignition\\BasilContextAwareException\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jon Cram",
+                    "email": "webignition@gmail.com"
+                }
+            ],
+            "description": "Models for basil language objects",
+            "homepage": "https://github.com/webignition/php-basil-context-aware-exception",
+            "time": "2019-07-13T14:46:44+00:00"
+        },
+        {
+            "name": "webignition/php-basil-model-provider",
+            "version": "0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webignition/php-basil-model-provider.git",
+                "reference": "0d47b926b5960d5a2ab8e045e71cfd072cd2c609"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webignition/php-basil-model-provider/zipball/0d47b926b5960d5a2ab8e045e71cfd072cd2c609",
+                "reference": "0d47b926b5960d5a2ab8e045e71cfd072cd2c609",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2",
+                "webignition/basil-models": ">=0.3,<1",
+                "webignition/php-basil-context-aware-exception": ">=0.1,<1"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.11.5",
+                "phpunit/phpunit": "~8.0",
+                "squizlabs/php_codesniffer": "3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "webignition\\BasilModelProvider\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jon Cram",
+                    "email": "webignition@gmail.com"
+                }
+            ],
+            "description": "Providers for basil models",
+            "homepage": "https://github.com/webignition/php-basil-model-provider",
+            "time": "2019-12-02T15:07:06+00:00"
         },
         {
             "name": "webignition/php-path-resolver",

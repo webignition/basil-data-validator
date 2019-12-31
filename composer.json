@@ -39,10 +39,11 @@
         "webignition/basil-models": ">=0.24,<1"
     },
     "require-dev": {
+        "phpstan/phpstan": "^0.12",
         "phpunit/phpunit": "~8.0",
         "squizlabs/php_codesniffer": "3.*",
-        "phpstan/phpstan": "^0.12",
-        "webignition/basil-parser": ">=0.8,<1"
+        "webignition/basil-parser": ">=0.8,<1",
+        "webignition/basil-resolver": "^0.2.0"
     },
     "config": {
         "sort-packages": true
