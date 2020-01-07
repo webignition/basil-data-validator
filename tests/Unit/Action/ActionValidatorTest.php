@@ -45,6 +45,9 @@ class ActionValidatorTest extends \PHPUnit\Framework\TestCase
             'click element identifier' => [
                 'action' => $actionParser->parse('click $".selector"'),
             ],
+            'click single-character CSS selector element identifier' => [
+                'action' => $actionParser->parse('click $"a"'),
+            ],
             'submit element identifier' => [
                 'action' => $actionParser->parse('submit $".selector"'),
             ],

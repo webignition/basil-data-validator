@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a772819da3f3e2a3c74fbc6f3dd9e836",
+    "content-hash": "52339cb2316593edbbf27ba7108bac03",
     "packages": [
         {
             "name": "webignition/basil-dom-identifier-factory",
@@ -53,16 +53,16 @@
         },
         {
             "name": "webignition/basil-identifier-analyser",
-            "version": "0.2",
+            "version": "0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webignition/basil-identifier-analyser.git",
-                "reference": "c7e941bfd68caf26745642113463c473bbfeafa6"
+                "reference": "1b1373c5abcbf90f397fc13136d9f353784bac21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webignition/basil-identifier-analyser/zipball/c7e941bfd68caf26745642113463c473bbfeafa6",
-                "reference": "c7e941bfd68caf26745642113463c473bbfeafa6",
+                "url": "https://api.github.com/repos/webignition/basil-identifier-analyser/zipball/1b1373c5abcbf90f397fc13136d9f353784bac21",
+                "reference": "1b1373c5abcbf90f397fc13136d9f353784bac21",
                 "shasum": ""
             },
             "require": {
@@ -90,7 +90,7 @@
                 }
             ],
             "homepage": "https://github.com/webignition/basil-identifier-analyser",
-            "time": "2019-12-17T10:28:56+00:00"
+            "time": "2020-01-07T18:12:46+00:00"
         },
         {
             "name": "webignition/basil-models",
