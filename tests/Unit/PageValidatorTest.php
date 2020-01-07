@@ -8,6 +8,7 @@ use webignition\BasilDataValidator\PageValidator;
 use webignition\BasilDataValidator\ResultType;
 use webignition\BasilModels\Page\Page;
 use webignition\BasilModels\Page\PageInterface;
+use webignition\BasilResolver\PageResolver;
 use webignition\BasilValidationResult\InvalidResult;
 use webignition\BasilValidationResult\InvalidResultInterface;
 use webignition\BasilValidationResult\ValidResult;
@@ -36,6 +37,8 @@ class PageValidatorTest extends \PHPUnit\Framework\TestCase
 
     public function validateIsValidDataProvider(): array
     {
+        $pageResolver = PageResolver::createResolver();
+
         return [
             'url only' => [
                 'page' => new Page('import_name', 'http://example.com'),
@@ -43,8 +46,21 @@ class PageValidatorTest extends \PHPUnit\Framework\TestCase
             'url and identifiers' => [
                 'page' => new Page('import_name', 'http://example.com', [
                     'form' => '$".form"',
+                    'input' => '$".input"',
+                ]),
+            ],
+            'url and identifiers, parent > child' => [
+                'page' => new Page('import_name', 'http://example.com', [
+                    'form' => '$".form"',
                     'form_input' => '$"{{ form }} .input"',
                 ]),
+            ],
+            'url and identifiers, grandparent > parent > child' => [
+                'page' => $pageResolver->resolve(new Page('import_name', 'http://example.com', [
+                    'form' => '$".form"',
+                    'form_container' => '$"{{ form }} .container"',
+                    'form_input' => '$"{{ form_container }} .input"',
+                ])),
             ],
         ];
     }
