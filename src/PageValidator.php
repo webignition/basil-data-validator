@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace webignition\BasilDataValidator;
 
-use webignition\BasilIdentifierAnalyser\IdentifierTypeAnalyser;
+use webignition\BasilDomIdentifierFactory\Extractor\DescendantIdentifierExtractor;
+use webignition\BasilDomIdentifierFactory\Extractor\ElementIdentifierExtractor;
 use webignition\BasilModels\Page\PageInterface;
 use webignition\BasilValidationResult\InvalidResult;
 use webignition\BasilValidationResult\ResultInterface;
@@ -17,17 +18,22 @@ class PageValidator
     public const CONTEXT_NAME = 'name';
     public const CONTEXT_IDENTIFIER = 'identifier';
 
-    private $identifierTypeAnalyser;
+    private $elementIdentifierExtractor;
+    private $descendantIdentifierExtractor;
 
-    public function __construct(IdentifierTypeAnalyser $identifierTypeAnalyser)
-    {
-        $this->identifierTypeAnalyser = $identifierTypeAnalyser;
+    public function __construct(
+        ElementIdentifierExtractor $elementIdentifierExtractor,
+        DescendantIdentifierExtractor $descendantIdentifierExtractor
+    ) {
+        $this->elementIdentifierExtractor = $elementIdentifierExtractor;
+        $this->descendantIdentifierExtractor = $descendantIdentifierExtractor;
     }
 
     public static function create(): PageValidator
     {
         return new PageValidator(
-            new IdentifierTypeAnalyser()
+            ElementIdentifierExtractor::createExtractor(),
+            DescendantIdentifierExtractor::createExtractor()
         );
     }
 
@@ -43,11 +49,19 @@ class PageValidator
         }
 
         $identifiers = $page->getIdentifiers();
+
         foreach ($identifiers as $name => $identifier) {
-            if (
-                !$this->identifierTypeAnalyser->isElementIdentifier($identifier) &&
-                !$this->identifierTypeAnalyser->isDescendantDomIdentifier($identifier)
-            ) {
+            $descendantIdentifier = $this->descendantIdentifierExtractor->extractIdentifier($identifier);
+            $elementIdentifier = $this->elementIdentifierExtractor->extractIdentifier($identifier);
+
+            $isDescendantDomIdentifier = null !== $descendantIdentifier;
+            $isElementIdentifier =
+                false === $isDescendantDomIdentifier &&
+                null !== $elementIdentifier;
+            $isAttributeIdentifier = $isElementIdentifier && $this->isAttributeIdentifierMatch($elementIdentifier);
+            $isElementIdentifier = $isElementIdentifier && !$isAttributeIdentifier;
+
+            if (!$isElementIdentifier && !$isDescendantDomIdentifier) {
                 return (new InvalidResult(
                     $page,
                     ResultType::PAGE,
@@ -60,5 +74,18 @@ class PageValidator
         }
 
         return new ValidResult($page);
+    }
+
+    private function isAttributeIdentifierMatch(string $elementIdentifier): bool
+    {
+        if ('' === $elementIdentifier) {
+            return false;
+        }
+
+        if ('"' === mb_substr($elementIdentifier, -1)) {
+            return false;
+        }
+
+        return preg_match('/\.(.+)$/', $elementIdentifier) > 0;
     }
 }

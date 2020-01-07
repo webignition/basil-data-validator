@@ -8,6 +8,8 @@ use webignition\BasilDataValidator\Action\ActionValidator;
 use webignition\BasilDataValidator\ResultType;
 use webignition\BasilDataValidator\ValueValidator;
 use webignition\BasilModels\Action\ActionInterface;
+use webignition\BasilModels\Action\InputAction;
+use webignition\BasilModels\Action\InteractionAction;
 use webignition\BasilParser\ActionParser;
 use webignition\BasilValidationResult\InvalidResult;
 use webignition\BasilValidationResult\InvalidResultInterface;
@@ -202,17 +204,17 @@ class ActionValidatorTest extends \PHPUnit\Framework\TestCase
                 ),
             ],
             'interaction action: identifier invalid (quoted literal)' => [
-                'action' => $actionParser->parse('click "selector"'),
+                'action' => new InteractionAction('click "selector"', 'click', '"selector"', '"selector"'),
                 'expectedResult' => new InvalidResult(
-                    $actionParser->parse('click "selector"'),
+                    new InteractionAction('click "selector"', 'click', '"selector"', '"selector"'),
                     ResultType::ACTION,
                     ActionValidator::REASON_INVALID_IDENTIFIER
                 ),
             ],
             'interaction action: identifier invalid (literal)' => [
-                'action' => $actionParser->parse('click selector'),
+                'action' => new InteractionAction('click selector', 'click', 'selector', 'selector'),
                 'expectedResult' => new InvalidResult(
-                    $actionParser->parse('click selector'),
+                    new InteractionAction('click selector', 'click', 'selector', 'selector'),
                     ResultType::ACTION,
                     ActionValidator::REASON_INVALID_IDENTIFIER
                 ),
@@ -290,9 +292,19 @@ class ActionValidatorTest extends \PHPUnit\Framework\TestCase
                 ),
             ],
             'input action: identifier invalid (quoted literal)' => [
-                'action' => $actionParser->parse('set "selector" to "value"'),
+                'action' => new InputAction(
+                    'set "selector" to "value"',
+                    '"selector" to "value"',
+                    '"selector"',
+                    '"value"'
+                ),
                 'expectedResult' => new InvalidResult(
-                    $actionParser->parse('set "selector" to "value"'),
+                    new InputAction(
+                        'set "selector" to "value"',
+                        '"selector" to "value"',
+                        '"selector"',
+                        '"value"'
+                    ),
                     ResultType::ACTION,
                     ActionValidator::REASON_INVALID_IDENTIFIER
                 ),
