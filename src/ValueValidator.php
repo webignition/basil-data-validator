@@ -32,7 +32,7 @@ class ValueValidator
     public static function create(): ValueValidator
     {
         return new ValueValidator(
-            new IdentifierTypeAnalyser(),
+            IdentifierTypeAnalyser::create(),
             new LiteralValueIdentifier()
         );
     }

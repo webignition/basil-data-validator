@@ -23,7 +23,7 @@ class AssertionContentValidator
     public static function create(): AssertionContentValidator
     {
         return new AssertionContentValidator(
-            new IdentifierTypeAnalyser(),
+            IdentifierTypeAnalyser::create(),
             ValueValidator::create()
         );
     }

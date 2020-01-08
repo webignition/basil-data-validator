@@ -35,7 +35,7 @@ class ActionValidator
     public static function create(): ActionValidator
     {
         return new ActionValidator(
-            new IdentifierTypeAnalyser(),
+            IdentifierTypeAnalyser::create(),
             ValueValidator::create()
         );
     }
