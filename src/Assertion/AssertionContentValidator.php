@@ -23,17 +23,14 @@ class AssertionContentValidator
     public static function create(): AssertionContentValidator
     {
         return new AssertionContentValidator(
-            new IdentifierTypeAnalyser(),
+            IdentifierTypeAnalyser::create(),
             ValueValidator::create()
         );
     }
 
     public function validate(string $content): ResultInterface
     {
-        if (
-            $this->identifierTypeAnalyser->isDomIdentifier($content) ||
-            $this->identifierTypeAnalyser->isDescendantDomIdentifier($content)
-        ) {
+        if ($this->identifierTypeAnalyser->isDomOrDescendantDomIdentifier($content)) {
             return new ValidResult($content);
         }
 
