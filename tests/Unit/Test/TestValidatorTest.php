@@ -42,14 +42,14 @@ class TestValidatorTest extends \PHPUnit\Framework\TestCase
     public function validateNotValidDataProvider(): array
     {
         $configurationWithEmptyBrowser = new Configuration('', '');
-        $testWithInvalidConfiguration = new Test('test name', $configurationWithEmptyBrowser, []);
+        $testWithInvalidConfiguration = new Test($configurationWithEmptyBrowser, []);
 
         $validConfiguration = new Configuration('chrome', 'http://example.com/');
 
-        $testWithNoSteps = new Test('test name', $validConfiguration, []);
+        $testWithNoSteps = new Test($validConfiguration, []);
 
         $invalidStep = new Step([], []);
-        $testWithInvalidStep = new Test('test name', $validConfiguration, [$invalidStep]);
+        $testWithInvalidStep = new Test($validConfiguration, [$invalidStep]);
 
         return [
             'invalid configuration' => [
@@ -93,7 +93,7 @@ class TestValidatorTest extends \PHPUnit\Framework\TestCase
     {
         $testParser = TestParser::create();
 
-        $test = $testParser->parse('', 'test.yml', [
+        $test = $testParser->parse([
             'config' => [
                 'browser' => 'chrome',
                 'url' => 'http://example.com',
