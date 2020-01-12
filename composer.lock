@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8e3dd6f2d8793362725d7bbca266a1a2",
+    "content-hash": "9ea67d3a43950bd9dbbf2af0e258a7f4",
     "packages": [
         {
             "name": "webignition/basil-dom-identifier-factory",
@@ -3073,23 +3073,23 @@
         },
         {
             "name": "webignition/basil-parser",
-            "version": "0.15",
+            "version": "0.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webignition/basil-parser.git",
-                "reference": "bbc6d334ba7ea12fd5c964312118dc5ef66233f4"
+                "reference": "ca2447625bbc380e6641f8ad1ab06187a2ef2174"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webignition/basil-parser/zipball/bbc6d334ba7ea12fd5c964312118dc5ef66233f4",
-                "reference": "bbc6d334ba7ea12fd5c964312118dc5ef66233f4",
+                "url": "https://api.github.com/repos/webignition/basil-parser/zipball/ca2447625bbc380e6641f8ad1ab06187a2ef2174",
+                "reference": "ca2447625bbc380e6641f8ad1ab06187a2ef2174",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "php": ">=7.2",
                 "webignition/basil-dom-identifier-factory": ">=0.6,<1",
-                "webignition/basil-models": ">=0.24,<1",
+                "webignition/basil-models": ">=0.25,<1",
                 "webignition/php-path-resolver": ">=0.1,<1"
             },
             "require-dev": {
@@ -3115,7 +3115,7 @@
             ],
             "description": "Parses raw basil data into basic data structures",
             "homepage": "https://github.com/webignition/basil-parser",
-            "time": "2020-01-07T10:59:23+00:00"
+            "time": "2020-01-09T17:16:19+00:00"
         },
         {
             "name": "webignition/basil-resolver",
