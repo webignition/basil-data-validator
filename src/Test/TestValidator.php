@@ -17,6 +17,7 @@ class TestValidator
     public const REASON_CONFIGURATION_INVALID = 'test-configuration-invalid';
     public const REASON_NO_STEPS = 'test-no-steps';
     public const REASON_STEP_INVALID = 'test-step-invalid';
+    public const CONTEXT_STEP_NAME = 'step-name';
 
     private $configurationValidator;
     private $stepValidator;
@@ -51,7 +52,7 @@ class TestValidator
             return $this->createInvalidResult($test, self::REASON_NO_STEPS);
         }
 
-        foreach ($steps as $step) {
+        foreach ($steps as $name => $step) {
             $stepValidationResult = $this->stepValidator->validate($step);
 
             if ($stepValidationResult instanceof InvalidResultInterface) {
@@ -59,7 +60,9 @@ class TestValidator
                     $test,
                     self::REASON_STEP_INVALID,
                     $stepValidationResult
-                );
+                )->withContext([
+                    self::CONTEXT_STEP_NAME => $name,
+                ]);
             }
         }
 
@@ -70,7 +73,7 @@ class TestValidator
         TestInterface $test,
         string $reason,
         ?InvalidResultInterface $invalidResult = null
-    ): ResultInterface {
+    ): InvalidResultInterface {
         return new InvalidResult($test, ResultType::TEST, $reason, $invalidResult);
     }
 }

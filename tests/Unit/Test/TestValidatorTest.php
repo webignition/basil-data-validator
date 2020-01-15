@@ -49,7 +49,9 @@ class TestValidatorTest extends \PHPUnit\Framework\TestCase
         $testWithNoSteps = new Test($validConfiguration, []);
 
         $invalidStep = new Step([], []);
-        $testWithInvalidStep = new Test($validConfiguration, [$invalidStep]);
+        $testWithInvalidStep = new Test($validConfiguration, [
+            'invalid step name' => $invalidStep,
+        ]);
 
         return [
             'invalid configuration' => [
@@ -75,7 +77,7 @@ class TestValidatorTest extends \PHPUnit\Framework\TestCase
             ],
             'invalid step' => [
                 'test' => $testWithInvalidStep,
-                'expectedResult' => new InvalidResult(
+                'expectedResult' => (new InvalidResult(
                     $testWithInvalidStep,
                     ResultType::TEST,
                     TestValidator::REASON_STEP_INVALID,
@@ -84,7 +86,9 @@ class TestValidatorTest extends \PHPUnit\Framework\TestCase
                         ResultType::STEP,
                         StepValidator::REASON_NO_ASSERTIONS
                     )
-                ),
+                ))->withContext([
+                    TestValidator::CONTEXT_STEP_NAME => 'invalid step name',
+                ]),
             ],
         ];
     }
