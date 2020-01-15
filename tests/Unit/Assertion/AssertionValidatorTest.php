@@ -58,11 +58,13 @@ class AssertionValidatorTest extends \PHPUnit\Framework\TestCase
             ],
             'invalid comparison' => [
                 'assertion' => new Assertion('$".button" glows', '$".button"', 'glows'),
-                'expectedResult' => new InvalidResult(
+                'expectedResult' => (new InvalidResult(
                     new Assertion('$".button" glows', '$".button"', 'glows'),
                     ResultType::ASSERTION,
                     AssertionValidator::REASON_INVALID_COMPARISON
-                ),
+                ))->withContext([
+                    AssertionValidator::CONTEXT_COMPARISON => 'glows',
+                ]),
             ],
             'invalid value' => [
                 'assertion' => $assertionParser->parse('$".selector" is $elements.element_name'),

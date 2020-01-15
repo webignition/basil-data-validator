@@ -17,6 +17,7 @@ class AssertionValidator
     public const REASON_INVALID_IDENTIFIER = 'assertion-invalid-identifier';
     public const REASON_INVALID_VALUE = 'assertion-invalid-value';
     public const REASON_INVALID_COMPARISON = 'assertion-invalid-comparison';
+    public const CONTEXT_COMPARISON = 'comparison';
 
     private const VALID_COMPARISONS = ['is', 'is-not', 'exists', 'not-exists', 'includes', 'excludes', 'matches'];
 
@@ -47,11 +48,13 @@ class AssertionValidator
         }
 
         if (!in_array($assertion->getComparison(), self::VALID_COMPARISONS)) {
-            return new InvalidResult(
+            return (new InvalidResult(
                 $assertion,
                 ResultType::ASSERTION,
                 self::REASON_INVALID_COMPARISON
-            );
+            ))->withContext([
+                self::CONTEXT_COMPARISON => $assertion->getComparison(),
+            ]);
         }
 
         if ($assertion instanceof ComparisonAssertionInterface) {
