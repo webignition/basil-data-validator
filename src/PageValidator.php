@@ -86,6 +86,10 @@ class PageValidator
             return false;
         }
 
+        if (preg_match('/:[0-9]+$/', $elementIdentifier)) {
+            return false;
+        }
+
         return preg_match('/\.(.+)$/', $elementIdentifier) > 0;
     }
 }

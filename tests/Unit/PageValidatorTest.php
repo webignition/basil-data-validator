@@ -62,6 +62,11 @@ class PageValidatorTest extends \PHPUnit\Framework\TestCase
                     'form_input' => '$"{{ form_container }} .input"',
                 ])),
             ],
+            'identifier with position' => [
+                'page' => $pageResolver->resolve(new Page('import_name', 'http://example.com', [
+                    'form' => '$".form":3',
+                ])),
+            ],
         ];
     }
 
