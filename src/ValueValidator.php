@@ -39,7 +39,7 @@ class ValueValidator
 
     public function validate(string $value): ResultInterface
     {
-        if ($this->identifierTypeAnalyser->isDomIdentifier($value)) {
+        if ($this->identifierTypeAnalyser->isDomOrDescendantDomIdentifier($value)) {
             return new ValidResult($value);
         }
 

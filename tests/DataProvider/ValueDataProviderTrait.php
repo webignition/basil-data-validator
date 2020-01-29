@@ -69,6 +69,9 @@ trait ValueDataProviderTrait
             'attribute dom identifier' => [
                 'value' => '$".selector".attribute_name',
             ],
+            'descendant dom identifier' => [
+                'value' => '$"{{ $".parent" }} .child"',
+            ],
             'environment parameter' => [
                 'value' => '$env.KEY',
             ],

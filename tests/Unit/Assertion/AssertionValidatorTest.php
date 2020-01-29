@@ -38,8 +38,6 @@ class AssertionValidatorTest extends \PHPUnit\Framework\TestCase
 
     public function invalidAssertionDataProvider(): array
     {
-        // invalid value
-
         $assertionParser = AssertionParser::create();
 
         return [
@@ -102,6 +100,9 @@ class AssertionValidatorTest extends \PHPUnit\Framework\TestCase
             'identifier: element identifier' => [
                 'value' => $assertionParser->parse('$".selector" is "value"'),
             ],
+            'identifier: descendant element identifier' => [
+                'value' => $assertionParser->parse('$"{{ $".parent" }} .child" is "value"'),
+            ],
             'identifier: attribute identifier' => [
                 'value' => $assertionParser->parse('$".selector".attribute_name is "value"'),
             ],
@@ -159,6 +160,9 @@ class AssertionValidatorTest extends \PHPUnit\Framework\TestCase
         return [
             'value: element identifier' => [
                 'value' => $assertionParser->parse('"value" is $".selector"'),
+            ],
+            'value: descendant element identifier' => [
+                'value' => $assertionParser->parse('"value" is $"{{ $".parent" }} .child"'),
             ],
             'value: attribute identifier' => [
                 'value' => $assertionParser->parse('"value" is $".selector".attribute_name'),
