@@ -45,7 +45,10 @@ class ActionValidator
         if ($action instanceof InteractionActionInterface) {
             $identifier = $action->getIdentifier();
 
-            if (!$this->identifierTypeAnalyser->isElementIdentifier($identifier)) {
+            if (
+                !$this->identifierTypeAnalyser->isElementIdentifier($identifier) &&
+                !$this->identifierTypeAnalyser->isDescendantDomIdentifier($identifier)
+            ) {
                 return new InvalidResult(
                     $action,
                     ResultType::ACTION,
