@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace webignition\BasilDataValidator;
 
-use webignition\BasilDomIdentifierFactory\Extractor\DescendantIdentifierExtractor;
-use webignition\BasilDomIdentifierFactory\Extractor\ElementIdentifierExtractor;
 use webignition\BasilModels\Page\PageInterface;
 use webignition\BasilValidationResult\InvalidResult;
 use webignition\BasilValidationResult\ResultInterface;
 use webignition\BasilValidationResult\ValidResult;
+use webignition\BasilValueExtractor\DescendantIdentifierExtractor;
+use webignition\BasilValueExtractor\ElementIdentifierExtractor;
 
 class PageValidator
 {
@@ -52,7 +52,7 @@ class PageValidator
 
         foreach ($identifiers as $name => $identifier) {
             $descendantIdentifier = $this->descendantIdentifierExtractor->extractIdentifier($identifier);
-            $elementIdentifier = $this->elementIdentifierExtractor->extractIdentifier($identifier);
+            $elementIdentifier = $this->elementIdentifierExtractor->extract($identifier);
 
             $isDescendantDomIdentifier = null !== $descendantIdentifier;
             $isElementIdentifier =

@@ -46,7 +46,7 @@ class ActionValidatorTest extends \PHPUnit\Framework\TestCase
                 'action' => $actionParser->parse('click $".selector"'),
             ],
             'click descendant dom identifier' => [
-                'action' => $actionParser->parse('click $"{{ $".parent" }} .child"'),
+                'action' => $actionParser->parse('click $".parent" >> $".child"'),
             ],
             'click single-character CSS selector element identifier' => [
                 'action' => $actionParser->parse('click $"a"'),
@@ -58,7 +58,7 @@ class ActionValidatorTest extends \PHPUnit\Framework\TestCase
                 'action' => $actionParser->parse('wait-for $".selector"'),
             ],
             'wait-for descendant dom identifier' => [
-                'action' => $actionParser->parse('wait-for $"{{ $".parent" }} .child"'),
+                'action' => $actionParser->parse('wait-for $".parent" >> $".child"'),
             ],
             'wait literal value (unquoted)' => [
                 'action' => $actionParser->parse('wait 1'),
@@ -70,7 +70,7 @@ class ActionValidatorTest extends \PHPUnit\Framework\TestCase
                 'action' => $actionParser->parse('wait $".selector"'),
             ],
             'wait descendant dom identifier' => [
-                'action' => $actionParser->parse('wait $"{{ $".parent" }} .child"'),
+                'action' => $actionParser->parse('wait $".parent" >> $".child"'),
             ],
             'wait attribute identifier value' => [
                 'action' => $actionParser->parse('wait $".selector".attribute'),
@@ -97,10 +97,10 @@ class ActionValidatorTest extends \PHPUnit\Framework\TestCase
                 'action' => $actionParser->parse('set $".selector" to $".value"'),
             ],
             'set; descendant dom identifier value' => [
-                'action' => $actionParser->parse('set $".selector" to $"{{ $".parent" }} .child"'),
+                'action' => $actionParser->parse('set $".selector" to $".parent" >> $".child"'),
             ],
             'set; descendant dom identifier identifier and value' => [
-                'action' => $actionParser->parse('set $"{{ $".parent" }} .child" to $"{{ $".parent" }} .child"'),
+                'action' => $actionParser->parse('set $".parent" >> $".child" to $".parent" >> $".child"'),
             ],
             'set; attribute identifier value' => [
                 'action' => $actionParser->parse('set $".selector" to $".element".attribute'),

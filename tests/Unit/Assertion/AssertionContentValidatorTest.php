@@ -51,10 +51,10 @@ class AssertionContentValidatorTest extends \PHPUnit\Framework\TestCase
     {
         return [
             'descendant element dom identifier' => [
-                'value' => '$"{{ parent }} .selector"',
+                'value' => '$"parent" >> $".selector"',
             ],
             'descendant attribute dom identifier' => [
-                'value' => '$"{{ parent }} .selector".attribute_name',
+                'value' => '$"parent" >> $".selector".attribute_name',
             ],
         ];
     }
