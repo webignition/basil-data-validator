@@ -49,17 +49,17 @@ class PageValidatorTest extends \PHPUnit\Framework\TestCase
                     'input' => '$".input"',
                 ]),
             ],
-            'url and identifiers, parent > child' => [
+            'url and identifiers, parent >> child' => [
                 'page' => new Page('import_name', 'http://example.com', [
                     'form' => '$".form"',
-                    'form_input' => '$"{{ form }} .input"',
+                    'form_input' => '$form >> $".input"',
                 ]),
             ],
             'url and identifiers, grandparent > parent > child' => [
                 'page' => $pageResolver->resolve(new Page('import_name', 'http://example.com', [
                     'form' => '$".form"',
-                    'form_container' => '$"{{ form }} .container"',
-                    'form_input' => '$"{{ form_container }} .input"',
+                    'form_container' => '$form >> $".container"',
+                    'form_input' => '$form_container >> $".input"',
                 ])),
             ],
             'identifier with position' => [
