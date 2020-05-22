@@ -17,7 +17,7 @@ class DataValidator
     public const REASON_DATASET_INVALID = 'data-dataset-invalid';
     public const REASON_DATA_EMPTY = 'data-empty';
 
-    private $dataSetValidator;
+    private DataSetValidator $dataSetValidator;
 
     public function __construct(DataSetValidator $dataSetValidator)
     {

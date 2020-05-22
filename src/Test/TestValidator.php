@@ -19,8 +19,8 @@ class TestValidator
     public const REASON_STEP_INVALID = 'test-step-invalid';
     public const CONTEXT_STEP_NAME = 'step-name';
 
-    private $configurationValidator;
-    private $stepValidator;
+    private ConfigurationValidator $configurationValidator;
+    private StepValidator $stepValidator;
 
     public function __construct(ConfigurationValidator $configurationValidator, StepValidator $stepValidator)
     {

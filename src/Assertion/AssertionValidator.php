@@ -21,7 +21,7 @@ class AssertionValidator
 
     private const VALID_COMPARISONS = ['is', 'is-not', 'exists', 'not-exists', 'includes', 'excludes', 'matches'];
 
-    private $assertionContentValidator;
+    private AssertionContentValidator $assertionContentValidator;
 
     public function __construct(AssertionContentValidator $assertionContentValidator)
     {

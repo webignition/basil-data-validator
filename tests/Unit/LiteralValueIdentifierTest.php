@@ -8,10 +8,7 @@ use webignition\BasilDataValidator\LiteralValueIdentifier;
 
 class LiteralValueIdentifierTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var LiteralValueIdentifier
-     */
-    private $literalValueIdentifier;
+    private LiteralValueIdentifier $literalValueIdentifier;
 
     protected function setUp(): void
     {

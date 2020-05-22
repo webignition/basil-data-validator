@@ -17,10 +17,7 @@ use webignition\BasilValidationResult\ValidResult;
 
 class ActionValidatorTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var ActionValidator
-     */
-    private $actionValidator;
+    private ActionValidator $actionValidator;
 
     protected function setUp(): void
     {

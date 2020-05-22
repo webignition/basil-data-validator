@@ -23,10 +23,7 @@ use webignition\BasilValidationResult\ValidResult;
 
 class StepValidatorTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var StepValidator
-     */
-    private $validator;
+    private StepValidator $validator;
 
     protected function setUp(): void
     {

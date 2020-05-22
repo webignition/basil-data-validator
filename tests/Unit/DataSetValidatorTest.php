@@ -16,10 +16,7 @@ use webignition\BasilValidationResult\ValidResult;
 
 class DataSetValidatorTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var DataSetValidator
-     */
-    private $validator;
+    private DataSetValidator $validator;
 
     protected function setUp(): void
     {

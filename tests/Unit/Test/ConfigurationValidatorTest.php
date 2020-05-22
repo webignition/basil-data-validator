@@ -14,10 +14,7 @@ use webignition\BasilValidationResult\ValidResult;
 
 class ConfigurationValidatorTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var ConfigurationValidator
-     */
-    private $configurationValidator;
+    private ConfigurationValidator $configurationValidator;
 
     protected function setUp(): void
     {

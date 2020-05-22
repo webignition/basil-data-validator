@@ -14,10 +14,7 @@ class ValueValidatorTest extends \PHPUnit\Framework\TestCase
 {
     use ValueDataProviderTrait;
 
-    /**
-     * @var ValueValidator
-     */
-    private $valueValidator;
+    private ValueValidator $valueValidator;
 
     protected function setUp(): void
     {

@@ -14,10 +14,7 @@ class AssertionContentValidatorTest extends \PHPUnit\Framework\TestCase
 {
     use ValueDataProviderTrait;
 
-    /**
-     * @var AssertionContentValidator
-     */
-    private $validator;
+    private AssertionContentValidator $validator;
 
     protected function setUp(): void
     {

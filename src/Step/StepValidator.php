@@ -29,9 +29,9 @@ class StepValidator
     public const REASON_DATA_INVALID = 'step-data-invalid';
     public const CONTEXT_STATEMENT = 'statement';
 
-    private $actionValidator;
-    private $assertionValidator;
-    private $dataValidator;
+    private ActionValidator $actionValidator;
+    private AssertionValidator $assertionValidator;
+    private DataValidator $dataValidator;
 
     public function __construct(
         ActionValidator $actionValidator,
