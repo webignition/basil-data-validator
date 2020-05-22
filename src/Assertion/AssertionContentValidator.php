@@ -11,8 +11,8 @@ use webignition\BasilValidationResult\ValidResult;
 
 class AssertionContentValidator
 {
-    private $identifierTypeAnalyser;
-    private $valueValidator;
+    private IdentifierTypeAnalyser $identifierTypeAnalyser;
+    private ValueValidator $valueValidator;
 
     public function __construct(IdentifierTypeAnalyser $identifierTypeAnalyser, ValueValidator $valueValidator)
     {

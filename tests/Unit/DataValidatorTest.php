@@ -18,10 +18,7 @@ use webignition\BasilValidationResult\ValidResult;
 
 class DataValidatorTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var DataValidator
-     */
-    private $validator;
+    private DataValidator $validator;
 
     protected function setUp(): void
     {

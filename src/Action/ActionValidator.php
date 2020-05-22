@@ -23,8 +23,8 @@ class ActionValidator
     public const REASON_INVALID_VALUE = 'action-invalid-value';
     private const VALID_TYPES = ['click', 'set', 'submit', 'wait', 'wait-for', 'back', 'forward', 'reload'];
 
-    private $identifierTypeAnalyser;
-    private $valueValidator;
+    private IdentifierTypeAnalyser $identifierTypeAnalyser;
+    private ValueValidator $valueValidator;
 
     public function __construct(IdentifierTypeAnalyser $identifierTypeAnalyser, ValueValidator $valueValidator)
     {

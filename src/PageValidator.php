@@ -18,8 +18,8 @@ class PageValidator
     public const CONTEXT_NAME = 'name';
     public const CONTEXT_IDENTIFIER = 'identifier';
 
-    private $elementIdentifierExtractor;
-    private $descendantIdentifierExtractor;
+    private ElementIdentifierExtractor $elementIdentifierExtractor;
+    private DescendantIdentifierExtractor $descendantIdentifierExtractor;
 
     public function __construct(
         ElementIdentifierExtractor $elementIdentifierExtractor,

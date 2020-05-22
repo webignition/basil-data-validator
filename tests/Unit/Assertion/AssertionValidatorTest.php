@@ -16,10 +16,7 @@ use webignition\BasilValidationResult\ValidResult;
 
 class AssertionValidatorTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var AssertionValidator
-     */
-    private $validator;
+    private AssertionValidator $validator;
 
     protected function setUp(): void
     {

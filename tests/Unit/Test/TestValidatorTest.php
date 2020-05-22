@@ -19,10 +19,7 @@ use webignition\BasilValidationResult\ValidResult;
 
 class TestValidatorTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var TestValidator
-     */
-    private $testValidator;
+    private TestValidator $testValidator;
 
     protected function setUp(): void
     {

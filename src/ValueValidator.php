@@ -18,8 +18,8 @@ class ValueValidator
     private const DATA_PARAMETER_REGEX = '/^\$data\.[^\.]+$/';
     private const ENVIRONMENT_PARAMETER_REGEX = '/^\$env\.[^\.]+$/';
 
-    private $identifierTypeAnalyser;
-    private $literalValueIdentifier;
+    private IdentifierTypeAnalyser $identifierTypeAnalyser;
+    private LiteralValueIdentifier $literalValueIdentifier;
 
     public function __construct(
         IdentifierTypeAnalyser $identifierTypeAnalyser,

@@ -15,10 +15,7 @@ use webignition\BasilValidationResult\ValidResult;
 
 class PageValidatorTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var PageValidator
-     */
-    private $validator;
+    private PageValidator $validator;
 
     protected function setUp(): void
     {
