@@ -32,7 +32,7 @@
         ]
     },
     "require": {
-        "php": ">=7.2",
+        "php": ">=7.4",
         "ext-mbstring": "*",
         "webignition/basil-dom-identifier-factory": ">=0.12,<1",
         "webignition/basil-identifier-analyser": ">=0.6,<1",
@@ -41,7 +41,7 @@
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12",
-        "phpunit/phpunit": "~8.0",
+        "phpunit/phpunit": "~9.0",
         "squizlabs/php_codesniffer": "3.*",
         "webignition/basil-parser": ">=0.21,<1",
         "webignition/basil-resolver": ">=0.7,<1"
