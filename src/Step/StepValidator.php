@@ -8,8 +8,6 @@ use webignition\BasilDataValidator\Action\ActionValidator;
 use webignition\BasilDataValidator\Assertion\AssertionValidator;
 use webignition\BasilDataValidator\DataValidator;
 use webignition\BasilDataValidator\ResultType;
-use webignition\BasilModels\Action\InputActionInterface;
-use webignition\BasilModels\Assertion\ComparisonAssertionInterface;
 use webignition\BasilModels\DataParameter\DataParameter;
 use webignition\BasilModels\DataParameter\DataParameterInterface;
 use webignition\BasilModels\DataSet\DataSetCollection;
@@ -85,7 +83,7 @@ class StepValidator
                 );
             }
 
-            if ($action instanceof InputActionInterface) {
+            if ($action->isInput()) {
                 $value = $action->getValue();
 
                 if (DataParameter::is($value)) {
@@ -120,7 +118,7 @@ class StepValidator
                 }
             }
 
-            if ($assertion instanceof ComparisonAssertionInterface) {
+            if ($assertion->isComparison()) {
                 $value = $assertion->getValue();
 
                 if (DataParameter::is($value)) {
