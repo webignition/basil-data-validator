@@ -51,7 +51,7 @@ class AssertionValidatorTest extends \PHPUnit\Framework\TestCase
                     )
                 ),
             ],
-            'invalid comparison' => [
+            'invalid operator' => [
                 'assertion' => new Assertion('$".button" glows', '$".button"', 'glows'),
                 'expectedResult' => (new InvalidResult(
                     new Assertion('$".button" glows', '$".button"', 'glows'),
@@ -79,7 +79,7 @@ class AssertionValidatorTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider validAssertionIdentifierDataProvider
-     * @dataProvider validAssertionComparisonDataProvider
+     * @dataProvider validAssertionOperatorDataProvider
      * @dataProvider validAssertionValueDataProvider
      */
     public function testValidateIsValid(AssertionInterface $assertion)
@@ -121,30 +121,30 @@ class AssertionValidatorTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function validAssertionComparisonDataProvider(): array
+    public function validAssertionOperatorDataProvider(): array
     {
         $assertionParser = AssertionParser::create();
 
         return [
-            'comparison: is' => [
+            'operator: is' => [
                 'value' => $assertionParser->parse('$".selector" is "value"'),
             ],
-            'comparison: is-not' => [
+            'operator: is-not' => [
                 'value' => $assertionParser->parse('$".selector" is-not "value"'),
             ],
-            'comparison: exists' => [
+            'operator: exists' => [
                 'value' => $assertionParser->parse('$".selector" exists'),
             ],
-            'comparison: not-exists' => [
+            'operator: not-exists' => [
                 'value' => $assertionParser->parse('$".selector" not-exists'),
             ],
-            'comparison: includes' => [
+            'operator: includes' => [
                 'value' => $assertionParser->parse('$".selector" includes "value"'),
             ],
-            'comparison: excludes' => [
+            'operator: excludes' => [
                 'value' => $assertionParser->parse('$".selector" excludes "value"'),
             ],
-            'comparison: matches' => [
+            'operator: matches' => [
                 'value' => $assertionParser->parse('$".selector" matches "value"'),
             ],
         ];
