@@ -6,7 +6,6 @@ namespace webignition\BasilDataValidator\Assertion;
 
 use webignition\BasilDataValidator\ResultType;
 use webignition\BasilModels\Assertion\AssertionInterface;
-use webignition\BasilModels\Assertion\ComparisonAssertionInterface;
 use webignition\BasilValidationResult\InvalidResult;
 use webignition\BasilValidationResult\InvalidResultInterface;
 use webignition\BasilValidationResult\ResultInterface;
@@ -16,10 +15,10 @@ class AssertionValidator
 {
     public const REASON_INVALID_IDENTIFIER = 'assertion-invalid-identifier';
     public const REASON_INVALID_VALUE = 'assertion-invalid-value';
-    public const REASON_INVALID_COMPARISON = 'assertion-invalid-comparison';
-    public const CONTEXT_COMPARISON = 'comparison';
+    public const REASON_INVALID_OPERATOR = 'assertion-invalid-operator';
+    public const CONTEXT_OPERATOR = 'operator';
 
-    private const VALID_COMPARISONS = ['is', 'is-not', 'exists', 'not-exists', 'includes', 'excludes', 'matches'];
+    private const VALID_OPERATIONS = ['is', 'is-not', 'exists', 'not-exists', 'includes', 'excludes', 'matches'];
 
     private AssertionContentValidator $assertionContentValidator;
 
@@ -47,17 +46,17 @@ class AssertionValidator
             );
         }
 
-        if (!in_array($assertion->getComparison(), self::VALID_COMPARISONS)) {
+        if (!in_array($assertion->getOperator(), self::VALID_OPERATIONS)) {
             return (new InvalidResult(
                 $assertion,
                 ResultType::ASSERTION,
-                self::REASON_INVALID_COMPARISON
+                self::REASON_INVALID_OPERATOR
             ))->withContext([
-                self::CONTEXT_COMPARISON => $assertion->getComparison(),
+                self::CONTEXT_OPERATOR => $assertion->getOperator(),
             ]);
         }
 
-        if ($assertion instanceof ComparisonAssertionInterface) {
+        if ($assertion->isComparison()) {
             $valueValidationResult = $this->assertionContentValidator->validate($assertion->getValue());
             if ($valueValidationResult instanceof InvalidResultInterface) {
                 return new InvalidResult(
