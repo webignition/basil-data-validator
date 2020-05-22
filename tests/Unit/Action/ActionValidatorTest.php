@@ -7,9 +7,8 @@ namespace webignition\BasilDataValidator\Tests\Unit\Action;
 use webignition\BasilDataValidator\Action\ActionValidator;
 use webignition\BasilDataValidator\ResultType;
 use webignition\BasilDataValidator\ValueValidator;
+use webignition\BasilModels\Action\Action;
 use webignition\BasilModels\Action\ActionInterface;
-use webignition\BasilModels\Action\InputAction;
-use webignition\BasilModels\Action\InteractionAction;
 use webignition\BasilParser\ActionParser;
 use webignition\BasilValidationResult\InvalidResult;
 use webignition\BasilValidationResult\InvalidResultInterface;
@@ -219,17 +218,17 @@ class ActionValidatorTest extends \PHPUnit\Framework\TestCase
                 ),
             ],
             'interaction action: identifier invalid (quoted literal)' => [
-                'action' => new InteractionAction('click "selector"', 'click', '"selector"', '"selector"'),
+                'action' => new Action('click "selector"', 'click', '"selector"', '"selector"'),
                 'expectedResult' => new InvalidResult(
-                    new InteractionAction('click "selector"', 'click', '"selector"', '"selector"'),
+                    new Action('click "selector"', 'click', '"selector"', '"selector"'),
                     ResultType::ACTION,
                     ActionValidator::REASON_INVALID_IDENTIFIER
                 ),
             ],
             'interaction action: identifier invalid (literal)' => [
-                'action' => new InteractionAction('click selector', 'click', 'selector', 'selector'),
+                'action' => new Action('click selector', 'click', 'selector', 'selector'),
                 'expectedResult' => new InvalidResult(
-                    new InteractionAction('click selector', 'click', 'selector', 'selector'),
+                    new Action('click selector', 'click', 'selector', 'selector'),
                     ResultType::ACTION,
                     ActionValidator::REASON_INVALID_IDENTIFIER
                 ),
@@ -307,15 +306,17 @@ class ActionValidatorTest extends \PHPUnit\Framework\TestCase
                 ),
             ],
             'input action: identifier invalid (quoted literal)' => [
-                'action' => new InputAction(
+                'action' => new Action(
                     'set "selector" to "value"',
+                    'set',
                     '"selector" to "value"',
                     '"selector"',
                     '"value"'
                 ),
                 'expectedResult' => new InvalidResult(
-                    new InputAction(
+                    new Action(
                         'set "selector" to "value"',
+                        'set',
                         '"selector" to "value"',
                         '"selector"',
                         '"value"'

@@ -8,9 +8,6 @@ use webignition\BasilDataValidator\ResultType;
 use webignition\BasilDataValidator\ValueValidator;
 use webignition\BasilIdentifierAnalyser\IdentifierTypeAnalyser;
 use webignition\BasilModels\Action\ActionInterface;
-use webignition\BasilModels\Action\InputActionInterface;
-use webignition\BasilModels\Action\InteractionActionInterface;
-use webignition\BasilModels\Action\WaitActionInterface;
 use webignition\BasilValidationResult\InvalidResult;
 use webignition\BasilValidationResult\InvalidResultInterface;
 use webignition\BasilValidationResult\ResultInterface;
@@ -42,7 +39,7 @@ class ActionValidator
 
     public function validate(ActionInterface $action): ResultInterface
     {
-        if ($action instanceof InteractionActionInterface) {
+        if ($action->isInteraction() || $action->isInput()) {
             $identifier = $action->getIdentifier();
 
             if (
@@ -57,7 +54,7 @@ class ActionValidator
             }
         }
 
-        if ($action instanceof InputActionInterface) {
+        if ($action->isInput()) {
             $valueValidationResult = $this->valueValidator->validate($action->getValue());
 
             if ($valueValidationResult instanceof InvalidResultInterface) {
@@ -70,8 +67,8 @@ class ActionValidator
             }
         }
 
-        if ($action instanceof WaitActionInterface) {
-            $value = $action->getDuration();
+        if ($action->isWait()) {
+            $value = $action->getValue();
             $value = ctype_digit($value) ? '"' . $value . '"' : $value;
 
             $valueValidationResult = $this->valueValidator->validate($value);
