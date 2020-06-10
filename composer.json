@@ -34,17 +34,17 @@
     "require": {
         "php": ">=7.4",
         "ext-mbstring": "*",
-        "webignition/basil-dom-identifier-factory": ">=0.12,<1",
-        "webignition/basil-identifier-analyser": ">=0.6,<1",
-        "webignition/basil-models": ">=0.47,<1",
+        "webignition/basil-dom-identifier-factory": ">=0.13,<1",
+        "webignition/basil-identifier-analyser": ">=0.7,<1",
+        "webignition/basil-models": ">=0.51,<1",
         "webignition/basil-validation-result": ">=0.1,<1"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12",
         "phpunit/phpunit": "~9.0",
         "squizlabs/php_codesniffer": "3.*",
-        "webignition/basil-parser": ">=0.23,<1",
-        "webignition/basil-resolver": ">=0.8,<1"
+        "webignition/basil-parser": ">=0.24,<1",
+        "webignition/basil-resolver": ">=0.9,<1"
     },
     "config": {
         "sort-packages": true
