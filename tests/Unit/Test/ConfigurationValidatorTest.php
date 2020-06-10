@@ -51,9 +51,9 @@ class ConfigurationValidatorTest extends \PHPUnit\Framework\TestCase
                 ),
             ],
             'url is page url reference' => [
-                'configuration' => new Configuration('chrome', 'page_import_name.url'),
+                'configuration' => new Configuration('chrome', '$page_import_name.url'),
                 'expectedResult' => new InvalidResult(
-                    new Configuration('chrome', 'page_import_name.url'),
+                    new Configuration('chrome', '$page_import_name.url'),
                     ResultType::TEST_CONFIGURATION,
                     ConfigurationValidator::REASON_URL_IS_PAGE_URL_REFERENCE
                 ),
