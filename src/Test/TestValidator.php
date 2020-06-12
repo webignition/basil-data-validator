@@ -66,6 +66,8 @@ class TestValidator
             }
         }
 
+        $steps->rewind();
+
         return new ValidResult($test);
     }
 

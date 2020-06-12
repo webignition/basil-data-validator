@@ -9,6 +9,7 @@ use webignition\BasilDataValidator\Step\StepValidator;
 use webignition\BasilDataValidator\Test\ConfigurationValidator;
 use webignition\BasilDataValidator\Test\TestValidator;
 use webignition\BasilModels\Step\Step;
+use webignition\BasilModels\Step\StepCollection;
 use webignition\BasilModels\Test\Configuration;
 use webignition\BasilModels\Test\Test;
 use webignition\BasilModels\Test\TestInterface;
@@ -39,16 +40,16 @@ class TestValidatorTest extends \PHPUnit\Framework\TestCase
     public function validateNotValidDataProvider(): array
     {
         $configurationWithEmptyBrowser = new Configuration('', '');
-        $testWithInvalidConfiguration = new Test($configurationWithEmptyBrowser, []);
+        $testWithInvalidConfiguration = new Test($configurationWithEmptyBrowser, new StepCollection([]));
 
         $validConfiguration = new Configuration('chrome', 'http://example.com/');
 
-        $testWithNoSteps = new Test($validConfiguration, []);
+        $testWithNoSteps = new Test($validConfiguration, new StepCollection([]));
 
         $invalidStep = new Step([], []);
-        $testWithInvalidStep = new Test($validConfiguration, [
+        $testWithInvalidStep = new Test($validConfiguration, new StepCollection([
             'invalid step name' => $invalidStep,
-        ]);
+        ]));
 
         return [
             'invalid configuration' => [
@@ -112,5 +113,26 @@ class TestValidatorTest extends \PHPUnit\Framework\TestCase
         $expectedResult = new ValidResult($test);
 
         $this->assertEquals($expectedResult, $this->testValidator->validate($test));
+    }
+
+    public function testStepCollectionIsRewoundAfterIterating()
+    {
+        $testParser = TestParser::create();
+
+        $test = $testParser->parse([
+            'config' => [
+                'browser' => 'chrome',
+                'url' => 'http://example.com',
+            ],
+            'step one' => [
+                'assertions' => [
+                    '$page.title is "Example"',
+                ],
+            ],
+        ]);
+
+        $this->testValidator->validate($test);
+
+        $this->assertSame('step one', $test->getSteps()->key());
     }
 }
