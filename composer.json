@@ -40,7 +40,7 @@
         "ext-mbstring": "*",
         "webignition/basil-dom-identifier-factory": ">=0.13,<1",
         "webignition/basil-identifier-analyser": ">=0.7,<1",
-        "webignition/basil-models": ">=0.54,<1",
+        "webignition/basil-models": ">=0.57,<1",
         "webignition/basil-validation-result": ">=0.1,<1"
     },
     "require-dev": {

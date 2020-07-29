@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8337334f20264444a6b2d47c8566fd76",
+    "content-hash": "017629a58bc3436727cc546808864f4f",
     "packages": [
         {
             "name": "webignition/basil-dom-identifier-factory",
@@ -95,16 +95,16 @@
         },
         {
             "name": "webignition/basil-models",
-            "version": "0.54",
+            "version": "0.57",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webignition/basil-models.git",
-                "reference": "26b17de48a7daa4badd29d4af1ef1966b12019f0"
+                "reference": "67d500daa092590652d3d93c33d8fa70dfd265e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webignition/basil-models/zipball/26b17de48a7daa4badd29d4af1ef1966b12019f0",
-                "reference": "26b17de48a7daa4badd29d4af1ef1966b12019f0",
+                "url": "https://api.github.com/repos/webignition/basil-models/zipball/67d500daa092590652d3d93c33d8fa70dfd265e2",
+                "reference": "67d500daa092590652d3d93c33d8fa70dfd265e2",
                 "shasum": ""
             },
             "require": {
@@ -115,6 +115,7 @@
                 "phpstan/phpstan": "^0.12",
                 "phpunit/phpunit": "~9.0",
                 "squizlabs/php_codesniffer": "3.*",
+                "symplify/easy-coding-standard": "^8.1",
                 "webignition/object-reflector": "^0.1.0"
             },
             "type": "library",
@@ -134,7 +135,7 @@
                 }
             ],
             "homepage": "https://github.com/webignition/basil-models",
-            "time": "2020-06-12T13:27:31+00:00"
+            "time": "2020-07-29T13:22:30+00:00"
         },
         {
             "name": "webignition/basil-validation-result",

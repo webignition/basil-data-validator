@@ -50,6 +50,14 @@ class ConfigurationValidatorTest extends \PHPUnit\Framework\TestCase
                     ConfigurationValidator::REASON_BROWSER_EMPTY
                 ),
             ],
+            'url empty' => [
+                'configuration' => new Configuration('chrome', ''),
+                'expectedResult' => new InvalidResult(
+                    new Configuration('chrome', ''),
+                    ResultType::TEST_CONFIGURATION,
+                    ConfigurationValidator::REASON_URL_EMPTY
+                ),
+            ],
             'url is page url reference' => [
                 'configuration' => new Configuration('chrome', '$page_import_name.url'),
                 'expectedResult' => new InvalidResult(
