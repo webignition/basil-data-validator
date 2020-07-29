@@ -165,11 +165,9 @@ class StepValidator
                 $dataValidationResult
             );
 
-            $result = $result->withContext([
+            return $result->withContext([
                 self::CONTEXT_STATEMENT => $statement,
             ]);
-
-            return $result;
         }
 
         return null;
