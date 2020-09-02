@@ -35,33 +35,33 @@ class ConfigurationValidatorTest extends \PHPUnit\Framework\TestCase
     {
         return [
             'browser empty' => [
-                'configuration' => new Configuration([], ''),
+                'configuration' => new Configuration('', ''),
                 'expectedResult' => new InvalidResult(
-                    new Configuration([], ''),
+                    new Configuration('', ''),
                     ResultType::TEST_CONFIGURATION,
                     ConfigurationValidator::REASON_BROWSER_EMPTY
                 ),
             ],
             'browser whitespace-only' => [
-                'configuration' => new Configuration(['   '], ''),
+                'configuration' => new Configuration('   ', ''),
                 'expectedResult' => new InvalidResult(
-                    new Configuration(['   '], ''),
+                    new Configuration('   ', ''),
                     ResultType::TEST_CONFIGURATION,
                     ConfigurationValidator::REASON_BROWSER_EMPTY
                 ),
             ],
             'url empty' => [
-                'configuration' => new Configuration(['chrome'], ''),
+                'configuration' => new Configuration('chrome', ''),
                 'expectedResult' => new InvalidResult(
-                    new Configuration(['chrome'], ''),
+                    new Configuration('chrome', ''),
                     ResultType::TEST_CONFIGURATION,
                     ConfigurationValidator::REASON_URL_EMPTY
                 ),
             ],
             'url is page url reference' => [
-                'configuration' => new Configuration(['chrome'], '$page_import_name.url'),
+                'configuration' => new Configuration('chrome', '$page_import_name.url'),
                 'expectedResult' => new InvalidResult(
-                    new Configuration(['chrome'], '$page_import_name.url'),
+                    new Configuration('chrome', '$page_import_name.url'),
                     ResultType::TEST_CONFIGURATION,
                     ConfigurationValidator::REASON_URL_IS_PAGE_URL_REFERENCE
                 ),
@@ -71,7 +71,7 @@ class ConfigurationValidatorTest extends \PHPUnit\Framework\TestCase
 
     public function testValidateIsValid()
     {
-        $configuration = new Configuration(['chrome'], 'http://example.com/');
+        $configuration = new Configuration('chrome', 'http://example.com/');
 
         $expectedResult = new ValidResult($configuration);
 
