@@ -58,7 +58,8 @@ class PageValidator
             $isElementIdentifier =
                 false === $isDescendantDomIdentifier &&
                 null !== $elementIdentifier;
-            $isAttributeIdentifier = $isElementIdentifier && $this->isAttributeIdentifierMatch($elementIdentifier);
+            $isAttributeIdentifier =
+                $isElementIdentifier && $this->isAttributeIdentifierMatch((string) $elementIdentifier);
             $isElementIdentifier = $isElementIdentifier && !$isAttributeIdentifier;
 
             if (!$isElementIdentifier && !$isDescendantDomIdentifier) {

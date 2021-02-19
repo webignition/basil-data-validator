@@ -26,11 +26,16 @@ class ConfigurationValidatorTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider validateNotValidDataProvider
      */
-    public function testValidateNotValid(ConfigurationInterface $configuration, InvalidResultInterface $expectedResult)
-    {
+    public function testValidateNotValid(
+        ConfigurationInterface $configuration,
+        InvalidResultInterface $expectedResult
+    ): void {
         $this->assertEquals($expectedResult, $this->configurationValidator->validate($configuration));
     }
 
+    /**
+     * @return array[]
+     */
     public function validateNotValidDataProvider(): array
     {
         return [
@@ -69,7 +74,7 @@ class ConfigurationValidatorTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function testValidateIsValid()
+    public function testValidateIsValid(): void
     {
         $configuration = new Configuration('chrome', 'http://example.com/');
 

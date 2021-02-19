@@ -25,7 +25,7 @@ class DataSetValidatorTest extends \PHPUnit\Framework\TestCase
         $this->validator = DataSetValidator::create();
     }
 
-    public function testValidateIsValid()
+    public function testValidateIsValid(): void
     {
         $dataSet = new DataSet('0', [
             'key1' => 'value1',
@@ -47,10 +47,13 @@ class DataSetValidatorTest extends \PHPUnit\Framework\TestCase
         DataSetInterface $dataSet,
         DataParameterInterface $dataParameter,
         InvalidResultInterface $expectedResult
-    ) {
+    ): void {
         $this->assertEquals($expectedResult, $this->validator->validate($dataSet, $dataParameter));
     }
 
+    /**
+     * @return array[]
+     */
     public function invalidDataSetDataProvider(): array
     {
         return [

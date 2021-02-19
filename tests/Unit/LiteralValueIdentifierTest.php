@@ -20,11 +20,14 @@ class LiteralValueIdentifierTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider isDataProvider
      */
-    public function testIs(string $value, bool $expectedIs)
+    public function testIs(string $value, bool $expectedIs): void
     {
         $this->assertSame($this->literalValueIdentifier->is($value), $expectedIs);
     }
 
+    /**
+     * @return array[]
+     */
     public function isDataProvider(): array
     {
         return [

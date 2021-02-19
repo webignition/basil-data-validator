@@ -35,11 +35,14 @@ class StepValidatorTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider validateIsValidDataProvider
      */
-    public function testValidateIsValid(StepInterface $step)
+    public function testValidateIsValid(StepInterface $step): void
     {
         $this->assertEquals(new ValidResult($step), $this->validator->validate($step));
     }
 
+    /**
+     * @return array[]
+     */
     public function validateIsValidDataProvider(): array
     {
         $stepParser = StepParser::create();
@@ -82,11 +85,14 @@ class StepValidatorTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider invalidStepDataProvider
      */
-    public function testValidateNotValid(StepInterface $step, InvalidResultInterface $expectedResult)
+    public function testValidateNotValid(StepInterface $step, InvalidResultInterface $expectedResult): void
     {
         $this->assertEquals($expectedResult, $this->validator->validate($step));
     }
 
+    /**
+     * @return array[]
+     */
     public function invalidStepDataProvider(): array
     {
         $stepParser = StepParser::create();

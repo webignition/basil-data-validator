@@ -84,7 +84,7 @@ class StepValidator
             }
 
             if ($action->isInput()) {
-                $value = $action->getValue();
+                $value = (string) $action->getValue();
 
                 if (DataParameter::is($value)) {
                     $dataValidationResult = $this->validateStatementData($step, $action, new DataParameter($value));
@@ -119,7 +119,7 @@ class StepValidator
             }
 
             if ($assertion->isComparison()) {
-                $value = $assertion->getValue();
+                $value = (string) $assertion->getValue();
 
                 if (DataParameter::is($value)) {
                     $dataValidationResult = $this->validateStatementData($step, $assertion, new DataParameter($value));

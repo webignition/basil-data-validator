@@ -6,6 +6,7 @@ namespace webignition\BasilDataValidator\Test;
 
 use webignition\BasilDataValidator\ResultType;
 use webignition\BasilDataValidator\Step\StepValidator;
+use webignition\BasilModels\Step\StepInterface;
 use webignition\BasilModels\Test\TestInterface;
 use webignition\BasilValidationResult\InvalidResult;
 use webignition\BasilValidationResult\InvalidResultInterface;
@@ -53,16 +54,18 @@ class TestValidator
         }
 
         foreach ($steps as $name => $step) {
-            $stepValidationResult = $this->stepValidator->validate($step);
+            if ($step instanceof StepInterface) {
+                $stepValidationResult = $this->stepValidator->validate($step);
 
-            if ($stepValidationResult instanceof InvalidResultInterface) {
-                return $this->createInvalidResult(
-                    $test,
-                    self::REASON_STEP_INVALID,
-                    $stepValidationResult
-                )->withContext([
-                    self::CONTEXT_STEP_NAME => $name,
-                ]);
+                if ($stepValidationResult instanceof InvalidResultInterface) {
+                    return $this->createInvalidResult(
+                        $test,
+                        self::REASON_STEP_INVALID,
+                        $stepValidationResult
+                    )->withContext([
+                        self::CONTEXT_STEP_NAME => $name,
+                    ]);
+                }
             }
         }
 

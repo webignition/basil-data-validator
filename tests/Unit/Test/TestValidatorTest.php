@@ -32,11 +32,14 @@ class TestValidatorTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider validateNotValidDataProvider
      */
-    public function testValidateNotValid(TestInterface $test, InvalidResultInterface $expectedResult)
+    public function testValidateNotValid(TestInterface $test, InvalidResultInterface $expectedResult): void
     {
         $this->assertEquals($expectedResult, $this->testValidator->validate($test));
     }
 
+    /**
+     * @return array[]
+     */
     public function validateNotValidDataProvider(): array
     {
         $configurationWithEmptyBrowser = new Configuration('', '');
@@ -91,7 +94,7 @@ class TestValidatorTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function testValidateIsValid()
+    public function testValidateIsValid(): void
     {
         $testParser = TestParser::create();
 
@@ -115,7 +118,7 @@ class TestValidatorTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expectedResult, $this->testValidator->validate($test));
     }
 
-    public function testStepCollectionIsRewoundAfterIterating()
+    public function testStepCollectionIsRewoundAfterIterating(): void
     {
         $testParser = TestParser::create();
 

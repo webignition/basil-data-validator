@@ -40,7 +40,7 @@ class ActionValidator
     public function validate(ActionInterface $action): ResultInterface
     {
         if ($action->isInteraction() || $action->isInput()) {
-            $identifier = $action->getIdentifier();
+            $identifier = (string) $action->getIdentifier();
 
             if (
                 !$this->identifierTypeAnalyser->isElementIdentifier($identifier) &&
@@ -55,7 +55,7 @@ class ActionValidator
         }
 
         if ($action->isInput()) {
-            $valueValidationResult = $this->valueValidator->validate($action->getValue());
+            $valueValidationResult = $this->valueValidator->validate((string) $action->getValue());
 
             if ($valueValidationResult instanceof InvalidResultInterface) {
                 return new InvalidResult(
@@ -68,7 +68,7 @@ class ActionValidator
         }
 
         if ($action->isWait()) {
-            $value = $action->getValue();
+            $value = (string) $action->getValue();
             $value = ctype_digit($value) ? '"' . $value . '"' : $value;
 
             $valueValidationResult = $this->valueValidator->validate($value);
