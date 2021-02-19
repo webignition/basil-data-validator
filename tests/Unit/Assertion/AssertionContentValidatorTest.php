@@ -26,7 +26,7 @@ class AssertionContentValidatorTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider invalidValueDataProvider
      */
-    public function testValidateNotValid(string $value, string $expectedReason)
+    public function testValidateNotValid(string $value, string $expectedReason): void
     {
         $expectedResult = new InvalidResult($value, ResultType::VALUE, $expectedReason);
 
@@ -37,13 +37,16 @@ class AssertionContentValidatorTest extends \PHPUnit\Framework\TestCase
      * @dataProvider validValueDataProvider
      * @dataProvider validAssertionValueDataProvider
      */
-    public function testValidateIsValid(string $value)
+    public function testValidateIsValid(string $value): void
     {
         $expectedResult = new ValidResult($value);
 
         $this->assertEquals($expectedResult, $this->validator->validate($value));
     }
 
+    /**
+     * @return array[]
+     */
     public function validAssertionValueDataProvider(): array
     {
         return [

@@ -27,11 +27,14 @@ class PageValidatorTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider validateIsValidDataProvider
      */
-    public function testValidateIsValid(PageInterface $page)
+    public function testValidateIsValid(PageInterface $page): void
     {
         $this->assertEquals(new ValidResult($page), $this->validator->validate($page));
     }
 
+    /**
+     * @return array[]
+     */
     public function validateIsValidDataProvider(): array
     {
         $pageResolver = PageResolver::createResolver();
@@ -70,11 +73,14 @@ class PageValidatorTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider validateNotValidDataProvider
      */
-    public function testValidateNotValid(PageInterface $page, InvalidResultInterface $expectedResult)
+    public function testValidateNotValid(PageInterface $page, InvalidResultInterface $expectedResult): void
     {
         $this->assertEquals($expectedResult, $this->validator->validate($page));
     }
 
+    /**
+     * @return array[]
+     */
     public function validateNotValidDataProvider(): array
     {
         return [

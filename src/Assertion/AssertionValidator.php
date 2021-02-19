@@ -57,7 +57,7 @@ class AssertionValidator
         }
 
         if ($assertion->isComparison()) {
-            $valueValidationResult = $this->assertionContentValidator->validate($assertion->getValue());
+            $valueValidationResult = $this->assertionContentValidator->validate((string) $assertion->getValue());
             if ($valueValidationResult instanceof InvalidResultInterface) {
                 return new InvalidResult(
                     $assertion,

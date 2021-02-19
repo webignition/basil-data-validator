@@ -28,11 +28,14 @@ class AssertionValidatorTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider invalidAssertionDataProvider
      */
-    public function testValidateNotValid(AssertionInterface $assertion, InvalidResultInterface $expectedResult)
+    public function testValidateNotValid(AssertionInterface $assertion, InvalidResultInterface $expectedResult): void
     {
         $this->assertEquals($expectedResult, $this->validator->validate($assertion));
     }
 
+    /**
+     * @return array[]
+     */
     public function invalidAssertionDataProvider(): array
     {
         $assertionParser = AssertionParser::create();
@@ -82,13 +85,16 @@ class AssertionValidatorTest extends \PHPUnit\Framework\TestCase
      * @dataProvider validAssertionOperatorDataProvider
      * @dataProvider validAssertionValueDataProvider
      */
-    public function testValidateIsValid(AssertionInterface $assertion)
+    public function testValidateIsValid(AssertionInterface $assertion): void
     {
         $expectedResult = new ValidResult($assertion);
 
         $this->assertEquals($expectedResult, $this->validator->validate($assertion));
     }
 
+    /**
+     * @return array[]
+     */
     public function validAssertionIdentifierDataProvider(): array
     {
         $assertionParser = AssertionParser::create();
@@ -121,6 +127,9 @@ class AssertionValidatorTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array[]
+     */
     public function validAssertionOperatorDataProvider(): array
     {
         $assertionParser = AssertionParser::create();
@@ -150,6 +159,9 @@ class AssertionValidatorTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array[]
+     */
     public function validAssertionValueDataProvider(): array
     {
         $assertionParser = AssertionParser::create();

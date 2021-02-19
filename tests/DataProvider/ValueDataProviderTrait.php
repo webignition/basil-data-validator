@@ -8,6 +8,9 @@ use webignition\BasilDataValidator\ValueValidator;
 
 trait ValueDataProviderTrait
 {
+    /**
+     * @return array[]
+     */
     public function invalidValueDataProvider(): array
     {
         return [
@@ -42,6 +45,9 @@ trait ValueDataProviderTrait
         ];
     }
 
+    /**
+     * @return array[]
+     */
     public function validValueDataProvider(): array
     {
         return [

@@ -26,7 +26,7 @@ class ValueValidatorTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider invalidValueDataProvider
      */
-    public function testValidateNotValid(string $value, string $expectedReason)
+    public function testValidateNotValid(string $value, string $expectedReason): void
     {
         $expectedResult = new InvalidResult($value, ResultType::VALUE, $expectedReason);
 
@@ -36,7 +36,7 @@ class ValueValidatorTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider validValueDataProvider
      */
-    public function testValidateIsValid(string $value)
+    public function testValidateIsValid(string $value): void
     {
         $expectedResult = new ValidResult($value);
 

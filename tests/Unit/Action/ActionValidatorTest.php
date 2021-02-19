@@ -28,11 +28,14 @@ class ActionValidatorTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider validateIsValidDataProvider
      */
-    public function testValidateIsValid(ActionInterface $action)
+    public function testValidateIsValid(ActionInterface $action): void
     {
         $this->assertEquals(new ValidResult($action), $this->actionValidator->validate($action));
     }
 
+    /**
+     * @return array[]
+     */
     public function validateIsValidDataProvider(): array
     {
         $actionParser = ActionParser::create();
@@ -143,11 +146,14 @@ class ActionValidatorTest extends \PHPUnit\Framework\TestCase
      * @dataProvider invalidWaitActionDataProvider
      * @dataProvider invalidActionTypeDataProvider
      */
-    public function testValidateNotValid(ActionInterface $action, InvalidResultInterface $expectedResult)
+    public function testValidateNotValid(ActionInterface $action, InvalidResultInterface $expectedResult): void
     {
         $this->assertEquals($expectedResult, $this->actionValidator->validate($action));
     }
 
+    /**
+     * @return array[]
+     */
     public function invalidInteractionActionDataProvider(): array
     {
         $actionParser = ActionParser::create();
@@ -236,6 +242,9 @@ class ActionValidatorTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array[]
+     */
     public function invalidInputActionDataProvider(): array
     {
         $actionParser = ActionParser::create();
@@ -341,6 +350,9 @@ class ActionValidatorTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array[]
+     */
     public function invalidWaitActionDataProvider(): array
     {
         $actionParser = ActionParser::create();
@@ -362,6 +374,9 @@ class ActionValidatorTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array[]
+     */
     public function invalidActionTypeDataProvider(): array
     {
         $actionParser = ActionParser::create();
