@@ -43,8 +43,8 @@ class ActionValidator
             $identifier = (string) $action->getIdentifier();
 
             if (
-                !$this->identifierTypeAnalyser->isElementIdentifier($identifier) &&
-                !$this->identifierTypeAnalyser->isDescendantDomIdentifier($identifier)
+                !$this->identifierTypeAnalyser->isElementIdentifier($identifier)
+                && !$this->identifierTypeAnalyser->isDescendantDomIdentifier($identifier)
             ) {
                 return new InvalidResult(
                     $action,
