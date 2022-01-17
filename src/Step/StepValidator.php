@@ -110,7 +110,7 @@ class StepValidator
 
             $identifier = $assertion->getIdentifier();
 
-            if (DataParameter::is($identifier)) {
+            if (is_string($identifier) && DataParameter::is($identifier)) {
                 $dataValidationResult = $this->validateStatementData($step, $assertion, new DataParameter($identifier));
 
                 if ($dataValidationResult instanceof InvalidResultInterface) {
