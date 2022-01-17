@@ -36,7 +36,7 @@ class AssertionValidator
 
     public function validate(AssertionInterface $assertion): ResultInterface
     {
-        $identifierValidationResult = $this->assertionContentValidator->validate($assertion->getIdentifier());
+        $identifierValidationResult = $this->assertionContentValidator->validate((string) $assertion->getIdentifier());
         if ($identifierValidationResult instanceof InvalidResultInterface) {
             return new InvalidResult(
                 $assertion,
