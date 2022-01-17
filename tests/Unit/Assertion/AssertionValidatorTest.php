@@ -34,7 +34,7 @@ class AssertionValidatorTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return array[]
+     * @return array<mixed>
      */
     public function invalidAssertionDataProvider(): array
     {
@@ -93,7 +93,7 @@ class AssertionValidatorTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return array[]
+     * @return array<mixed>
      */
     public function validAssertionIdentifierDataProvider(): array
     {
@@ -128,7 +128,7 @@ class AssertionValidatorTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return array[]
+     * @return array<mixed>
      */
     public function validAssertionOperatorDataProvider(): array
     {
@@ -160,7 +160,7 @@ class AssertionValidatorTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return array[]
+     * @return array<mixed>
      */
     public function validAssertionValueDataProvider(): array
     {

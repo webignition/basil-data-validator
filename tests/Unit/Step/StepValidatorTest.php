@@ -41,7 +41,7 @@ class StepValidatorTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return array[]
+     * @return array<mixed>
      */
     public function validateIsValidDataProvider(): array
     {
@@ -91,7 +91,7 @@ class StepValidatorTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return array[]
+     * @return array<mixed>
      */
     public function invalidStepDataProvider(): array
     {

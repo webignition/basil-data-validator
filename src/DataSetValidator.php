@@ -28,7 +28,8 @@ class DataSetValidator
             return (new InvalidResult($dataSet, ResultType::DATASET, self::REASON_DATASET_INCOMPLETE))
                 ->withContext([
                     self::CONTEXT_DATA_PARAMETER_NAME => $property,
-                ]);
+                ])
+            ;
         }
 
         return new ValidResult($dataSet);
