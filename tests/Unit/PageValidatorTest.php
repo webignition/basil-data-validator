@@ -33,7 +33,7 @@ class PageValidatorTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return array[]
+     * @return array<mixed>
      */
     public function validateIsValidDataProvider(): array
     {
@@ -79,7 +79,7 @@ class PageValidatorTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return array[]
+     * @return array<mixed>
      */
     public function validateNotValidDataProvider(): array
     {

@@ -59,7 +59,7 @@ class DataValidatorTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return array[]
+     * @return array<mixed>
      */
     public function invalidDataSetDataProvider(): array
     {

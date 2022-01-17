@@ -34,7 +34,7 @@ class ActionValidatorTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return array[]
+     * @return array<mixed>
      */
     public function validateIsValidDataProvider(): array
     {
@@ -152,7 +152,7 @@ class ActionValidatorTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return array[]
+     * @return array<mixed>
      */
     public function invalidInteractionActionDataProvider(): array
     {
@@ -243,7 +243,7 @@ class ActionValidatorTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return array[]
+     * @return array<mixed>
      */
     public function invalidInputActionDataProvider(): array
     {
@@ -351,7 +351,7 @@ class ActionValidatorTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return array[]
+     * @return array<mixed>
      */
     public function invalidWaitActionDataProvider(): array
     {
@@ -375,7 +375,7 @@ class ActionValidatorTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return array[]
+     * @return array<mixed>
      */
     public function invalidActionTypeDataProvider(): array
     {

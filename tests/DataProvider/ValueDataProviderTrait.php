@@ -9,7 +9,7 @@ use webignition\BasilDataValidator\ValueValidator;
 trait ValueDataProviderTrait
 {
     /**
-     * @return array[]
+     * @return array<mixed>
      */
     public function invalidValueDataProvider(): array
     {
@@ -46,7 +46,7 @@ trait ValueDataProviderTrait
     }
 
     /**
-     * @return array[]
+     * @return array<mixed>
      */
     public function validValueDataProvider(): array
     {

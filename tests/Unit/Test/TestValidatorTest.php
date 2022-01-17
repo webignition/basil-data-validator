@@ -38,7 +38,7 @@ class TestValidatorTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return array[]
+     * @return array<mixed>
      */
     public function validateNotValidDataProvider(): array
     {

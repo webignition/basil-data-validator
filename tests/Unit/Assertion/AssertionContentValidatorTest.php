@@ -45,7 +45,7 @@ class AssertionContentValidatorTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return array[]
+     * @return array<mixed>
      */
     public function validAssertionValueDataProvider(): array
     {
