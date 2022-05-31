@@ -38,7 +38,7 @@
         ]
     },
     "require": {
-        "php": "^8.0|^8.1",
+        "php": "^8.1",
         "ext-mbstring": "*",
         "webignition/basil-dom-identifier-factory": ">=0.15,<1",
         "webignition/basil-identifier-analyser": ">=0.9,<1",
